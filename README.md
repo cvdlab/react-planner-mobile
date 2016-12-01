@@ -1,8 +1,3 @@
-# react-redux-crumbs
+# react-planner-mobile
 
-React + Redux boilerplate project.
-
-## Let's start
-```
-  npm install && npm start
-```
+### Mobile porting of [https://github.com/cvdlab/react-planner](https://github.com/cvdlab/react-planner)
