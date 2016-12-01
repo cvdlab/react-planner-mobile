@@ -1,21 +1,19 @@
 import {createStore} from 'redux';
 import {Record} from 'immutable';
 
-const State = Record({
-  count: 0
-}, 'State');
+const State = Record({}, 'State');
 
 
-function addNumber(state, number) {
+/*function addNumber(state, number) {
   return state.set('count', number + state.count);
-}
+}*/
 
 function reducer(state, action) {
   state = state || new State();
 
   switch (action.type) {
-    case "ADD_NUMBER":
-      return addNumber(state, action.number);
+    /*case "ADD_NUMBER":
+      return addNumber(state, action.number);*/
 
     default:
       return state;
