@@ -1,19 +1,30 @@
 import React, {PropTypes} from 'react';
-import FormData from './form-data';
-import Count from './count';
+import Dimensions from 'react-dimensions';
+/*import FormData from './form-data';*/
 
-const STYLE = {
-  margin: "20px"
-};
+class View extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-export default function View({state, addNumber}) {
-  return (
-    <div style={STYLE}>
-      <Count value={state.count}/>
-      <FormData addNumber={addNumber}/>
-    </div>
-  )
+    render() {
+        return (
+        <div>
+          <svg width={this.props.containerWidth} height={this.props.containerHeight}>
+              <circle
+                  cx={this.props.containerWidth/2}
+                  cy={this.props.containerHeight/2}
+                  fill="#a00"
+                  r={this.props.containerHeight/4}
+              />
+          </svg>
+        </div>
+
+        )
+  }
 }
+
+export default Dimensions()(View)
 
 View.propTypes = {
   state: PropTypes.object.isRequired,
