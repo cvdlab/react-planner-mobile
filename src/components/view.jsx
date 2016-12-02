@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import Dimensions from 'react-dimensions';
 import {ReactSVGPanZoom} from 'react-svg-pan-zoom';
-/*import FormData from './form-data';*/
 
 class View extends React.Component {
     constructor(props) {
@@ -13,6 +12,10 @@ class View extends React.Component {
         this.Viewer.fitToViewer();
     }
 
+    addPoint(SVGPointX, SVGPointY) {
+        this.props.addComment(Math.round(SVGPointX), Math.round(SVGPointY))
+    }
+
     render() {
         return (
         <div>
@@ -20,10 +23,8 @@ class View extends React.Component {
                 width={this.props.containerWidth-4}
                 height={this.props.containerHeight-4}
                 ref={Viewer => this.Viewer = Viewer}
-                onClick={event => console.log('click', event.x, event.y, event.originalEvent)}
-                onMouseUp={event => console.log('up', event.x, event.y)}
-                onMouseMove={event => console.log('move', event.x, event.y)}
-                onMouseDown={event => console.log('down', event.x, event.y)}>
+                onClick={event => this.addPoint(event.x, event.y)}
+                tool={'auto'}>
 
                     <svg width={2000} height={2000}>
                         <circle
@@ -43,8 +44,8 @@ class View extends React.Component {
 export default Dimensions()(View)
 
 View.propTypes = {
-  state: PropTypes.object.isRequired
-  /*addNumber: PropTypes.func.isRequired*/
+  state: PropTypes.object.isRequired,
+  addComment: PropTypes.func.isRequired
 };
 
 

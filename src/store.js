@@ -1,19 +1,23 @@
 import {createStore} from 'redux';
 import {Record} from 'immutable';
 
-const State = Record({}, 'State');
+const State = Record({
+    comments: []
+}, 'State');
 
 
-/*function addNumber(state, number) {
-  return state.set('count', number + state.count);
-}*/
+function addComment(state, x, y) {
+  var tmp = state.comments;
+  tmp.push([x,y]);
+  return state.set('comments', tmp);
+}
 
 function reducer(state, action) {
   state = state || new State();
 
   switch (action.type) {
-    /*case "ADD_NUMBER":
-      return addNumber(state, action.number);*/
+    case "ADD_COMMENT":
+      return addComment(state, action.x, action.y);
 
     default:
       return state;
