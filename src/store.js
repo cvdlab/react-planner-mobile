@@ -1,15 +1,15 @@
 import {createStore} from 'redux';
-import {Record} from 'immutable';
+import {Record, List, Map} from 'immutable';
 
 const State = Record({
-    comments: []
+    comments: new List()
 }, 'State');
 
 
 function addComment(state, x, y) {
-  var tmp = state.comments;
-  tmp.push([x,y]);
-  return state.set('comments', tmp);
+  let point = new Map({x, y});
+  let comments = state.comments.push(point);
+  return state.set('comments', comments);
 }
 
 function reducer(state, action) {

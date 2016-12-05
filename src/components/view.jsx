@@ -2,10 +2,14 @@ import React, {PropTypes} from 'react';
 import Dimensions from 'react-dimensions';
 import {ReactSVGPanZoom} from 'react-svg-pan-zoom';
 
+import Comments from './comments';
+
 class View extends React.Component {
+
     constructor(props) {
         super(props);
         this.Viewer = null;
+
     }
 
     componentDidMount() {
@@ -13,10 +17,12 @@ class View extends React.Component {
     }
 
     addPoint(SVGPointX, SVGPointY) {
-        this.props.addComment(Math.round(SVGPointX), Math.round(SVGPointY))
+        this.props.addComment(Math.round(SVGPointX), Math.round(SVGPointY));
     }
 
+
     render() {
+
         return (
         <div>
             <ReactSVGPanZoom
@@ -24,16 +30,24 @@ class View extends React.Component {
                 height={this.props.containerHeight-4}
                 ref={Viewer => this.Viewer = Viewer}
                 onClick={event => this.addPoint(event.x, event.y)}
-                tool={'auto'}>
+                tool={'auto'}
+                detectAutoPan={false}
+                toolbarPosition={'none'}>
 
-                    <svg width={2000} height={2000}>
-                        <circle
-                            cx={1000}
-                            cy={1000}
-                            fill="#a00"
-                            r={100}
-                        />
-                    </svg>
+                <svg
+                    width={2000}
+                    height={2000}>
+
+                    <circle
+                        cx={1000}
+                        cy={1000}
+                        fill="#a00"
+                        r={100} />
+
+                    <Comments points={this.props.state.comments}/>
+
+                </svg>
+
             </ReactSVGPanZoom>
         </div>
 
