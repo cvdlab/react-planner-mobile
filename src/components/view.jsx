@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import Dimensions from 'react-dimensions';
 import {ReactSVGPanZoom} from 'react-svg-pan-zoom';
 
+import {MODE_DRAWING,MODE_IDLE} from '../constants';
+
 import Comments from './comments';
 
 class View extends React.Component {
@@ -20,7 +22,13 @@ class View extends React.Component {
         this.props.addComment(Math.round(SVGPointX), Math.round(SVGPointY));
     }
 
+    startDrawing() {
+        this.props.changeMode(MODE_DRAWING);
+    }
 
+    stopDrawing() {
+        this.props.changeMode(MODE_IDLE);
+    }
     render() {
 
         return (
@@ -30,6 +38,8 @@ class View extends React.Component {
                 height={this.props.containerHeight-4}
                 ref={Viewer => this.Viewer = Viewer}
                 onClick={event => this.addPoint(event.x, event.y)}
+                onMouseDown={event => this.startDrawing()}
+                onMouseUp  ={event => this.stopDrawing()}
                 tool={'auto'}
                 detectAutoPan={false}
                 toolbarPosition={'none'}>
@@ -59,7 +69,8 @@ export default Dimensions()(View)
 
 View.propTypes = {
   state: PropTypes.object.isRequired,
-  addComment: PropTypes.func.isRequired
+  addComment: PropTypes.func.isRequired,
+  changeMode: PropTypes.func.isRequired
 };
 
 

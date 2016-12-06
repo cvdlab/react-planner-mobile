@@ -6,3 +6,9 @@ export function addCommentAction(SVGPointX, SVGPointY) {
   }
 }
 
+export function changeModeAction(newMode) {
+    return {
+        type: "CHANGE_MODE",
+        mode: newMode
+    }
+}

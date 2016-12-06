@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import View from './view';
-import {addCommentAction} from '../actions';
+import {addCommentAction, changeModeAction} from '../actions';
 
 function mapStateToProps(reduxState) {
   return {
@@ -13,7 +13,8 @@ function mapStateToProps(reduxState) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addComment: bindActionCreators(addCommentAction, dispatch)
+    addComment: bindActionCreators(addCommentAction, dispatch),
+    changeMode: bindActionCreators(changeModeAction, dispatch)
   }
 }
 
