@@ -35,7 +35,6 @@ class View extends React.Component {
 
         if (this.mouseDown && this.props.state.mode != MODE_DRAWING)
             this.props.changeMode(MODE_DRAWING);
-
     }
 
     render() {
