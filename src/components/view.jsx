@@ -11,24 +11,33 @@ class View extends React.Component {
     constructor(props) {
         super(props);
         this.Viewer = null;
-
+        this.mouseDown=false;
     }
 
     componentDidMount() {
         this.Viewer.fitToViewer();
     }
 
-    addPoint(SVGPointX, SVGPointY) {
-        this.props.addComment(Math.round(SVGPointX), Math.round(SVGPointY));
+    onMouseDown() {
+        this.mouseDown = true;
     }
 
-    startDrawing() {
-        this.props.changeMode(MODE_DRAWING);
+    onMouseUp(SVGPointX, SVGPointY) {
+        this.mouseDown = false;
+
+        if (this.props.state.mode == MODE_DRAWING)
+            this.props.changeMode(MODE_IDLE);
+        else
+            this.props.addComment(Math.round(SVGPointX), Math.round(SVGPointY));
     }
 
-    stopDrawing() {
-        this.props.changeMode(MODE_IDLE);
+    onMouseMove(SVGPointX, SVGPointY){
+
+        if (this.mouseDown && this.props.state.mode != MODE_DRAWING)
+            this.props.changeMode(MODE_DRAWING);
+
     }
+
     render() {
 
         return (
@@ -37,12 +46,13 @@ class View extends React.Component {
                 width={this.props.containerWidth-4}
                 height={this.props.containerHeight-4}
                 ref={Viewer => this.Viewer = Viewer}
-                onClick={event => this.addPoint(event.x, event.y)}
-                onMouseDown={event => this.startDrawing()}
-                onMouseUp  ={event => this.stopDrawing()}
-                tool={'auto'}
+                onMouseDown={event => this.onMouseDown()}
+                onMouseUp=  {event => this.onMouseUp(event.x, event.y)}
+                onMouseMove={event => this.onMouseMove(event.x, event.y)}
+                //tool={'auto'}
                 detectAutoPan={false}
-                toolbarPosition={'none'}>
+                toolbarPosition={'none'}
+                >
 
                 <svg
                     width={2000}
