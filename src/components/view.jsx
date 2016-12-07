@@ -6,6 +6,10 @@ import {MODE_DRAWING,MODE_IDLE} from '../constants';
 
 import Comments from './comments';
 
+import {Models,State2DViewer,Catalog} from 'react-planner';
+import project from '../project/q_mura';
+import MyCatalog from '../catalog/mycatalog'
+
 class View extends React.Component {
 
     constructor(props) {
@@ -39,6 +43,8 @@ class View extends React.Component {
 
     render() {
 
+        let plannerState = new Models.State({scene: project});
+
         return (
         <div>
             <ReactSVGPanZoom
@@ -50,13 +56,13 @@ class View extends React.Component {
                 onMouseMove={event => this.onMouseMove(event.x, event.y)}
                 //tool={'auto'}
                 detectAutoPan={false}
-                toolbarPosition={'none'}
+                //toolbarPosition={'none'}
                 >
 
                 <svg
                     width={2000}
                     height={2000}>
-
+                    <State2DViewer catalog = { MyCatalog } state = {plannerState}/>
                     <circle
                         cx={1000}
                         cy={1000}
@@ -64,6 +70,7 @@ class View extends React.Component {
                         r={100} />
 
                     <Comments points={this.props.state.comments}/>
+
 
                 </svg>
 
