@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import View from './view';
-import {addCommentAction, changeModeAction} from '../actions';
+import * as actions from '../actions';
 
 function mapStateToProps(reduxState) {
   return {
@@ -12,10 +12,11 @@ function mapStateToProps(reduxState) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    addComment: bindActionCreators(addCommentAction, dispatch),
-    changeMode: bindActionCreators(changeModeAction, dispatch)
-  }
+    return {
+        startDrawing: bindActionCreators(actions.startDrawingAction, dispatch),
+        endDrawing: bindActionCreators(actions.endDrawingAction, dispatch),
+        updateDrawing: bindActionCreators(actions.updateDrawingAction, dispatch)
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(View);

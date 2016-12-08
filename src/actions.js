@@ -1,14 +1,23 @@
-export function addCommentAction(SVGPointX, SVGPointY) {
-  return {
-    type: "ADD_COMMENT",
-    x: SVGPointX,
-    y: SVGPointY
-  }
+export function startDrawingAction(SVGPointX, SVGPointY) {
+    return {
+        type: "START_DRAWING",
+        x: SVGPointX,
+        y: SVGPointY
+    }
 }
 
-export function changeModeAction(newMode) {
+export function endDrawingAction(SVGPointX, SVGPointY) {
     return {
-        type: "CHANGE_MODE",
-        mode: newMode
+        type: "END_DRAWING",
+        x: SVGPointX,
+        y: SVGPointY
+    }
+}
+
+export function updateDrawingAction(SVGPointX, SVGPointY) {
+    return {
+        type: "UPDATE_DRAWING",
+        x: SVGPointX,
+        y: SVGPointY
     }
 }
