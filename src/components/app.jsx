@@ -13,9 +13,9 @@ function mapStateToProps(reduxState) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        startDrawing: bindActionCreators(actions.startDrawingAction, dispatch),
-        endDrawing: bindActionCreators(actions.endDrawingAction, dispatch),
-        updateDrawing: bindActionCreators(actions.updateDrawingAction, dispatch)
+        enterAddingComment: bindActionCreators(actions.enterAddingCommentAction, dispatch),
+        addComment: bindActionCreators(actions.addCommentAction, dispatch),
+        cancelAddingComment: bindActionCreators(actions.cancelAddingCommentAction, dispatch)
     }
 }
 

@@ -8,8 +8,6 @@ import {Models,State2DViewer,Catalog} from 'react-planner';
 import project from '../project/q_mura';
 import MyCatalog from '../catalog/mycatalog';
 
-import {MODE_DRAWING} from '../constants';
-
 class View extends React.Component {
 
     constructor(props) {
@@ -22,16 +20,15 @@ class View extends React.Component {
     }
 
     onMouseDown(x, y) {
-        this.props.startDrawing(Math.round(x), Math.round(y));
+
     }
 
     onMouseUp(x, y) {
-        this.props.endDrawing(Math.round(x), Math.round(y));
+
     }
 
     onMouseMove(x, y) {
-        if (this.props.state.mode == MODE_DRAWING)
-            this.props.updateDrawing(Math.round(x), Math.round(y));
+
     }
 
     render() {
@@ -70,9 +67,9 @@ export default Dimensions()(View)
 
 View.propTypes = {
     state: PropTypes.object.isRequired,
-    startDrawing: PropTypes.func.isRequired,
-    endDrawing: PropTypes.func.isRequired,
-    updateDrawing: PropTypes.func.isRequired
+    enterAddingComment: PropTypes.func.isRequired,
+    addComment: PropTypes.func.isRequired,
+    cancelAddingComment: PropTypes.func.isRequired
 };
 
 

@@ -1,3 +1,5 @@
 //MODES
-export const MODE_IDLE = 'MODE_IDLE';
-export const MODE_DRAWING = 'MODE_DRAWING';
+export const MODE_PANNING = 'MODE_PANNING';
+export const MODE_ADDING_COMMENT = 'MODE_ADDING_COMMENT';
+export const MODE_ZOMMING_IN = 'MODE_ZOMMING_IN';
+export const MODE_ZOMMING_OUT = 'MODE_ZOMMING_OUT';
