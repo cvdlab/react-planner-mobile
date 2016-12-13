@@ -4,12 +4,7 @@ import IconZoomPlus from 'react-icons/lib/ti/zoom-in';
 import IconZoomMinus from 'react-icons/lib/ti/zoom-out';
 import IconComment from 'react-icons/lib/fa/comment';
 
-import {
-    MODE_PANNING,
-    MODE_ADDING_COMMENT,
-    MODE_ZOMMING_IN,
-    MODE_ZOMMING_OUT
-} from '../../constants';
+import {MODE_ZOOMING_IN, MODE_ZOOMING_OUT, MODE_ADDING_COMMENT} from '../../constants/modes';
 
 import ToolboxButton from './toolbox-button';
 
@@ -32,12 +27,12 @@ export default function Toolbox({mode}, {actions}) {
 
 
 
-            <ToolboxButton active={[MODE_ZOMMING_IN].includes(mode)} tooltip={"Zoom in"} 
+            <ToolboxButton active={[MODE_ZOOMING_IN].includes(mode)} tooltip={"Zoom in"}
                            onClick={event => actions.selectToolZoomIn()}>
                 <IconZoomPlus />
             </ToolboxButton>
 
-            <ToolboxButton active={[MODE_ZOMMING_OUT].includes(mode)} tooltip={"Zoom Out"}
+            <ToolboxButton active={[MODE_ZOOMING_OUT].includes(mode)} tooltip={"Zoom Out"}
                            onClick={event => actions.selectToolZoomOut()}>
                 <IconZoomMinus />
             </ToolboxButton>

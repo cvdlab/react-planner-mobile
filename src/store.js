@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
 import {Record, List, Map} from 'immutable';
-import {MODE_PANNING} from './constants';
+import {MODE_PANNING} from './constants/modes';
 
 import {addCommentAction} from './actions'
 
@@ -16,6 +16,9 @@ function addComment(state, x, y) {
     return state.set('comments', comments);
 }
 
+function enterAddCommentMode(state) {
+    return state.set('mode')
+}
 
 function reducer(state, action) {
     state = state || new State();
