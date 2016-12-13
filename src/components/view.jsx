@@ -3,6 +3,7 @@ import Dimensions from 'react-dimensions';
 import {ReactSVGPanZoom} from 'react-svg-pan-zoom';
 
 import Comments from './comments';
+import Toolbox from './toolbox/toolbox';
 
 import {Models,State2DViewer,Catalog} from 'react-planner';
 import project from '../project/q_mura';
@@ -57,6 +58,7 @@ class View extends React.Component {
                 </svg>
 
             </ReactSVGPanZoom>
+            <Toolbox />
         </div>
 
         )
