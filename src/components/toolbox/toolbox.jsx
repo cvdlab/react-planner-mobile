@@ -18,27 +18,23 @@ const STYLE = {
 
 };
 
-export default function Toolbox({mode}, {actions}) {
-
-
+export default function Toolbox({enterCommentMode}) {
 
     return (
         <div style={{...STYLE}}>
 
 
 
-            <ToolboxButton active={[MODE_ZOOMING_IN].includes(mode)} tooltip={"Zoom in"}
-                           onClick={event => actions.selectToolZoomIn()}>
+            <ToolboxButton /*active={[MODE_ZOOMING_IN].includes(mode)}*/ tooltip={"Zoom in"}>
                 <IconZoomPlus />
             </ToolboxButton>
 
-            <ToolboxButton active={[MODE_ZOOMING_OUT].includes(mode)} tooltip={"Zoom Out"}
-                           onClick={event => actions.selectToolZoomOut()}>
+            <ToolboxButton /*active={}*/ tooltip={"Zoom Out"}>
                 <IconZoomMinus />
             </ToolboxButton>
 
-            <ToolboxButton active={[MODE_ADDING_COMMENT].includes(mode)} tooltip={"Aggiungi Commento"}
-                           onClick={event => actions.selectAddComment()}>
+            <ToolboxButton /*active={[MODE_ADDING_COMMENT].includes(mode)}*/ tooltip={"Aggiungi Commento"}
+                           onClick={enterCommentMode}>
                 <IconComment />
             </ToolboxButton>
 
@@ -48,12 +44,11 @@ export default function Toolbox({mode}, {actions}) {
     )
 }
 
-/*
-
 Toolbox.propTypes = {
-    mode: PropTypes.object.isRequired,
+    enterCommentMode: PropTypes.func.isRequired
 };
 
+/*
 Toolbar.contextTypes = {
     azioni: PropTypes.object.isRequired
  };

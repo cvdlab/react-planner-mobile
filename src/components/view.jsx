@@ -9,19 +9,25 @@ import {Models,State2DViewer,Catalog} from 'react-planner';
 import project from '../project/q_mura';
 import MyCatalog from '../catalog/mycatalog';
 
+import {MODE_ADDING_COMMENT, MODE_PANNING} from '../constants/modes'
+
 class View extends React.Component {
 
     constructor(props) {
         super(props);
-        this.Viewer = null;
+        this.viewer = null;
     }
 
     componentDidMount() {
-        this.Viewer.fitToViewer();
+        this.viewer.fitToViewer();
     }
 
     onMouseDown(x, y) {
-
+        switch (this.props.state.mode) {
+            case MODE_ADDING_COMMENT:
+                this.props.addComment(Math.round(x), Math.round(y));
+                break;
+        }
     }
 
     onMouseUp(x, y) {
@@ -36,16 +42,24 @@ class View extends React.Component {
 
         let plannerState = new Models.State({scene: project});
 
+        let tool = "auto";
+        switch (this.props.state.mode) {
+            case MODE_ADDING_COMMENT:
+                tool = "none";
+                break;
+        }
+
         return (
         <div>
             <ReactSVGPanZoom
                 width={this.props.containerWidth-4}
                 height={this.props.containerHeight-4}
-                ref={Viewer => this.Viewer = Viewer}
+                ref={viewer => this.viewer = viewer}
                 onMouseDown={event => this.onMouseDown(event.x, event.y)}
                 onMouseUp={event => this.onMouseUp(event.x, event.y)}
                 onMouseMove={event => this.onMouseMove(event.x, event.y)}
                 detectAutoPan={false}
+                tool={tool}
                 >
 
                 <svg
@@ -58,7 +72,7 @@ class View extends React.Component {
                 </svg>
 
             </ReactSVGPanZoom>
-            <Toolbox />
+            <Toolbox enterCommentMode={this.props.enterAddingComment}/>
         </div>
 
         )

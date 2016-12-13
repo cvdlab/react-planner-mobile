@@ -1,8 +1,6 @@
 import {createStore} from 'redux';
 import {Record, List, Map} from 'immutable';
-import {MODE_PANNING} from './constants/modes';
-
-import {addCommentAction} from './actions'
+import {MODE_PANNING, MODE_ADDING_COMMENT} from './constants/modes';
 
 const State = Record({
     mode: MODE_PANNING,
@@ -11,19 +9,28 @@ const State = Record({
 
 
 function addComment(state, x, y) {
+    let newState = state
     let point = new Map({x, y});
-    let comments = state.comments.push(point);
-    return state.set('comments', comments);
+    let comments = newState.comments.push(point);
+    newState = newState.set('comments', comments);
+    newState = newState.set('mode', MODE_PANNING);
+    return newState;
 }
 
 function enterAddCommentMode(state) {
-    return state.set('mode')
+    return state.set('mode', MODE_ADDING_COMMENT);
 }
 
 function reducer(state, action) {
     state = state || new State();
 
     switch (action.type) {
+        case "ENTER_ADDING_COMMENT":
+            return enterAddCommentMode(state);
+            break;
+        case "ADD_COMMENT":
+            return addComment(state, action.x, action.y);
+            break;
         default:
             return state;
     }
