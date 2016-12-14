@@ -15,7 +15,9 @@ function mapDispatchToProps(dispatch) {
     return {
         enterAddingComment: bindActionCreators(actions.enterAddingCommentAction, dispatch),
         addComment: bindActionCreators(actions.addCommentAction, dispatch),
-        cancelAddingComment: bindActionCreators(actions.cancelAddingCommentAction, dispatch)
+        cancelAddingComment: bindActionCreators(actions.cancelAddingCommentAction, dispatch),
+        zoomIn: bindActionCreators(actions.zoomIn, dispatch),
+        zoomOut: bindActionCreators(actions.zoomOut, dispatch)
     }
 }
 

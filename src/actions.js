@@ -17,3 +17,15 @@ export function cancelAddingCommentAction() {
         type: "CANCEL_ADDING_COMMENT"
     }
 }
+
+export function zoomIn() {
+    return {
+        type: "ZOOMING_IN"
+    }
+}
+
+export function zoomOut() {
+    return {
+        type: "ZOOMING_OUT"
+    }
+}

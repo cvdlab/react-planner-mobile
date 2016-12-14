@@ -4,7 +4,8 @@ import {MODE_PANNING, MODE_ADDING_COMMENT} from './constants/modes';
 
 const State = Record({
     mode: MODE_PANNING,
-    comments: new List()
+    comments: new List(),
+    zoomLevel: 1
 }, 'State');
 
 
@@ -25,6 +26,14 @@ function cancelAddCommentMode(state) {
     return state.set('mode', MODE_PANNING);
 }
 
+function zoomIn(state) {
+    return state.set('zoomLevel', state.zoomLevel + 0.5);
+}
+
+function zoomOut(state) {
+    return state.set('zoomLevel', state.zoomLevel - 0.5);
+}
+
 function reducer(state, action) {
     state = state || new State();
 
@@ -37,6 +46,12 @@ function reducer(state, action) {
             break;
         case "ADD_COMMENT":
             return addComment(state, action.x, action.y);
+            break;
+        case "ZOOMING_IN":
+            return zoomIn(state);
+            break;
+        case "ZOOMING_OUT":
+            return zoomOut(state);
             break;
         default:
             return state;

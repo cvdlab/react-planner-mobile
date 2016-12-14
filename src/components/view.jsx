@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react';
 import Dimensions from 'react-dimensions';
-import {ReactSVGPanZoom,TOOL_ZOOM_IN,TOOL_ZOOM_OUT,TOOL_PAN, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
+import {ReactSVGPanZoom, TOOL_ZOOM_IN, TOOL_ZOOM_OUT, TOOL_PAN, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
 
 import Comments from './comments';
 import Toolbox from './toolbox/toolbox';
 
-import {Models,State2DViewer,Catalog} from 'react-planner';
+import {Models, State2DViewer, Catalog} from 'react-planner';
 import project from '../project/q_mura';
 import MyCatalog from '../catalog/mycatalog';
 
@@ -20,6 +20,7 @@ class View extends React.Component {
 
     componentDidMount() {
         this.viewer.fitToViewer();
+
     }
 
     onMouseDown(x, y) {
@@ -38,6 +39,7 @@ class View extends React.Component {
 
     }
 
+
     render() {
 
         let plannerState = new Models.State({scene: project});
@@ -50,30 +52,36 @@ class View extends React.Component {
         }
 
         return (
-        <div>
-            <ReactSVGPanZoom
-                width={this.props.containerWidth-4}
-                height={this.props.containerHeight-4}
-                ref={viewer => this.viewer = viewer}
-                onMouseDown={event => this.onMouseDown(event.x, event.y)}
-                onMouseUp={event => this.onMouseUp(event.x, event.y)}
-                onMouseMove={event => this.onMouseMove(event.x, event.y)}
-                detectAutoPan={false}
-                tool={tool}
+            <div>
+
+                <ReactSVGPanZoom
+                    width={this.props.containerWidth - 4}
+                    height={this.props.containerHeight - 4}
+                    ref={viewer => this.viewer = viewer}
+                    onMouseDown={event => this.onMouseDown(event.x, event.y)}
+                    onMouseUp={event => this.onMouseUp(event.x, event.y)}
+                    onMouseMove={event => this.onMouseMove(event.x, event.y)}
+                    detectAutoPan={false}
+                    tool={tool}
                 >
 
-                <svg
-                    width={2000}
-                    height={2000}>
+                    <svg
+                        width={2000}
+                        height={2000}>
 
-                    <State2DViewer catalog={MyCatalog} state={plannerState}/>
-                    <Comments points={this.props.state.comments}/>
+                        <State2DViewer catalog={MyCatalog} state={plannerState}/>
+                        <Comments points={this.props.state.comments}/>
 
-                </svg>
+                    </svg>
 
-            </ReactSVGPanZoom>
-            <Toolbox enterCommentMode={this.props.enterAddingComment} cancelCommentMode={this.props.cancelAddingComment} mode={this.props.state.mode} />
-        </div>
+                </ReactSVGPanZoom>
+                <Toolbox
+                    enterCommentMode={this.props.enterAddingComment}
+                    cancelCommentMode={this.props.cancelAddingComment}
+                    mode={this.props.state.mode}
+                    zoomOut={this.props.zoomOut}
+                    zoomIn={this.props.zoomIn}/>
+            </div>
 
         )
     }
@@ -85,7 +93,8 @@ View.propTypes = {
     state: PropTypes.object.isRequired,
     enterAddingComment: PropTypes.func.isRequired,
     addComment: PropTypes.func.isRequired,
-    cancelAddingComment: PropTypes.func.isRequired
+    cancelAddingComment: PropTypes.func.isRequired,
+    zoomIn: PropTypes.func.isRequired
 };
 
 
