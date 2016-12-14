@@ -1,6 +1,21 @@
 import React from 'react';
 
-const STYLE = {
+const STYLE_ACTIVE = {
+
+    width: "44px",
+    height: "44px",
+    border: "3px solid #333",
+    borderRadius: "25px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "25px",
+    backgroundColor: "#478dda",
+    margin: "10px"
+
+};
+
+const STYLE_PASSIVE = {
 
     width: "50px",
     height: "50px",
@@ -9,29 +24,20 @@ const STYLE = {
     alignItems: "center",
     justifyContent: "center",
     fontSize: "25px",
-    backgroundColor: "#478dda"
+    backgroundColor: "#478dda",
+    margin: "10px"
+
 };
 
 
 export default function ToolboxButton(props) {
 
-    if (props.active) {
-
-        STYLE.borderRadius= "28px";
-        STYLE.border = "2px solid #eee";
-        STYLE.margin = "10px 8px ";
-
-    }else{
-
-        STYLE.borderRadius= "25px";
-        STYLE.border = "";
-        STYLE.margin= "10px";
-
-    }
+    let style = props.active ? STYLE_ACTIVE : STYLE_PASSIVE;
 
     return (
-        <div style={STYLE} onClick={props.onClick}>
-            <a href="javascript:;" style={{color: "#FEFEFE", textDecoration: "none", marginTop:"-7px"}}  title={props.tooltip}>
+        <div style={style} onClick={props.onClick}>
+            <a href="javascript:;" style={{color: "#FEFEFE", textDecoration: "none", marginTop: "-7px"}}
+               title={props.tooltip}>
                 {props.children}
             </a>
         </div>

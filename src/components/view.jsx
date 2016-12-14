@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import Dimensions from 'react-dimensions';
-import {ReactSVGPanZoom} from 'react-svg-pan-zoom';
+import {ReactSVGPanZoom,TOOL_ZOOM_IN,TOOL_ZOOM_OUT,TOOL_PAN, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
 
 import Comments from './comments';
 import Toolbox from './toolbox/toolbox';
@@ -42,10 +42,10 @@ class View extends React.Component {
 
         let plannerState = new Models.State({scene: project});
 
-        let tool = "auto";
+        let tool = TOOL_PAN;
         switch (this.props.state.mode) {
             case MODE_ADDING_COMMENT:
-                tool = "none";
+                tool = TOOL_NONE;
                 break;
         }
 
@@ -72,7 +72,7 @@ class View extends React.Component {
                 </svg>
 
             </ReactSVGPanZoom>
-            <Toolbox enterCommentMode={this.props.enterAddingComment}/>
+            <Toolbox enterCommentMode={this.props.enterAddingComment} cancelCommentMode={this.props.cancelAddingComment} mode={this.props.state.mode} />
         </div>
 
         )

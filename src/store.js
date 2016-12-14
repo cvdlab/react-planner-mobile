@@ -21,12 +21,19 @@ function enterAddCommentMode(state) {
     return state.set('mode', MODE_ADDING_COMMENT);
 }
 
+function cancelAddCommentMode(state) {
+    return state.set('mode', MODE_PANNING);
+}
+
 function reducer(state, action) {
     state = state || new State();
 
     switch (action.type) {
         case "ENTER_ADDING_COMMENT":
             return enterAddCommentMode(state);
+            break;
+        case "CANCEL_ADDING_COMMENT":
+            return cancelAddCommentMode(state);
             break;
         case "ADD_COMMENT":
             return addComment(state, action.x, action.y);
