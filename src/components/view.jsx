@@ -10,17 +10,30 @@ import project from '../project/q_mura';
 import MyCatalog from '../catalog/mycatalog';
 
 import {MODE_ADDING_COMMENT, MODE_PANNING} from '../constants/modes'
+import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from '../constants/zoom'
 
 class View extends React.Component {
 
     constructor(props) {
         super(props);
         this.viewer = null;
+        this.zoomLevel = ZOOM_START_LEVEL;
     }
 
     componentDidMount() {
         this.viewer.fitToViewer();
 
+    }
+
+    componentDidUpdate() {
+        let deltaZoom = this.props.state.zoomLevel - this.zoomLevel;
+
+        if (deltaZoom > 0)
+            this.viewer.zoomOnViewerCenter(ZOOM_IN_DELTA);
+        else
+            this.viewer.zoomOnViewerCenter(ZOOM_OUT_DELTA);
+
+        this.zoomLevel = this.props.state.zoomLevel;
     }
 
     onMouseDown(x, y) {

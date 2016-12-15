@@ -1,11 +1,12 @@
 import {createStore} from 'redux';
 import {Record, List, Map} from 'immutable';
 import {MODE_PANNING, MODE_ADDING_COMMENT} from './constants/modes';
+import {ZOOM_LEVEL_MAX, ZOOM_LEVEL_MIN, ZOOM_START_LEVEL} from './constants/zoom'
 
 const State = Record({
     mode: MODE_PANNING,
     comments: new List(),
-    zoomLevel: 1
+    zoomLevel: ZOOM_START_LEVEL
 }, 'State');
 
 
@@ -27,11 +28,17 @@ function cancelAddCommentMode(state) {
 }
 
 function zoomIn(state) {
-    return state.set('zoomLevel', state.zoomLevel + 0.5);
+    let newZoom = state.zoomLevel + 1;
+    //if (newZoom == 0) newZoom = 1;
+    if (newZoom > ZOOM_LEVEL_MAX) newZoom = ZOOM_LEVEL_MAX;
+    return state.set('zoomLevel', newZoom);
 }
 
 function zoomOut(state) {
-    return state.set('zoomLevel', state.zoomLevel - 0.5);
+    let newZoom = state.zoomLevel - 1;
+    //if (newZoom == 0) newZoom = -1;
+    if (newZoom < ZOOM_LEVEL_MIN) newZoom = ZOOM_LEVEL_MIN;
+    return state.set('zoomLevel', newZoom);
 }
 
 function reducer(state, action) {
