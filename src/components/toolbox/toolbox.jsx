@@ -25,17 +25,17 @@ export default function Toolbox({mode, enterCommentMode, cancelCommentMode, zoom
 
 
             <ToolboxButton active={[MODE_ZOOMING_IN].includes(mode)} tooltip={"Zoom in"}
-                           onClick={event => zoomIn()}>
+                           onClick={event => {zoomIn(); event.preventDefault();}}>
                 <IconZoomPlus />
             </ToolboxButton>
 
             <ToolboxButton active={[MODE_ZOOMING_OUT].includes(mode)} tooltip={"Zoom Out"}
-                           onClick={event => zoomOut()}>
+                           onClick={event => {zoomOut(); event.preventDefault();}}>
                 <IconZoomMinus />
             </ToolboxButton>
 
             <ToolboxButton active={[MODE_ADDING_COMMENT].includes(mode)} tooltip={"Aggiungi Commento"}
-                           onClick={event => [MODE_PANNING].includes(mode) ? enterCommentMode() : cancelCommentMode()}>
+                           onClick={event => {[MODE_PANNING].includes(mode) ? enterCommentMode() : cancelCommentMode(); event.preventDefault();}}>
                 <IconComment />
             </ToolboxButton>
 

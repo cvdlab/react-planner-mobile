@@ -69,8 +69,8 @@ class View extends React.Component {
             <div>
 
                 <ReactSVGPanZoom
-                    width={this.props.containerWidth - 4}
-                    height={this.props.containerHeight - 4}
+                    width={this.props.containerWidth}
+                    height={this.props.containerHeight}
                     ref={viewer => this.viewer = viewer}
                     onMouseDown={event => this.onMouseDown(event.x, event.y)}
                     onMouseUp={event => this.onMouseUp(event.x, event.y)}
