@@ -30,10 +30,11 @@ class View extends React.Component {
 
         if (deltaZoom > 0)
             this.viewer.zoomOnViewerCenter(ZOOM_IN_DELTA);
-        else
+        else if (deltaZoom < 0)
             this.viewer.zoomOnViewerCenter(ZOOM_OUT_DELTA);
 
         this.zoomLevel = this.props.state.zoomLevel;
+
     }
 
     onMouseDown(x, y) {
