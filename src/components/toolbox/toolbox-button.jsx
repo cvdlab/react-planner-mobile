@@ -4,13 +4,13 @@ const STYLE_ACTIVE = {
 
     width: "44px",
     height: "44px",
-    border: "3px solid #333",
+    border: "3px solid #407FC5",
     borderRadius: "25px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: "25px",
-    backgroundColor: "#478dda",
+    backgroundColor: "#fff",
     margin: "10px"
 
 };
@@ -36,7 +36,7 @@ export default function ToolboxButton(props) {
 
     return (
         <div style={style} onClick={props.onClick}>
-            <a href="javascript:;" style={{color: "#FEFEFE", textDecoration: "none", marginTop: "-7px"}}
+            <a href="javascript:;" style={{color: props.active ? "#478dda" : "white", textDecoration: "none", marginTop: "-7px"}}
                title={props.tooltip}>
                 {props.children}
             </a>
