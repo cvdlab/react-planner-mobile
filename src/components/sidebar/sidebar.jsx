@@ -7,6 +7,9 @@ export default function Sidebar({width, height}) {
         <aside style={{backgroundColor: "#28292D", display: "block", overflow: "scroll", width: width, height: height}}
         >
             <CommentBox state={null} index={0}/>
+            <CommentBox state={null} index={0}/>
+            <CommentBox state={null} index={0}/>
+            <CommentBox state={null} index={0}/>
         </aside>
 
     )
