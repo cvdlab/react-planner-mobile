@@ -13,13 +13,14 @@ export default function CommentBox({state, index}) {
 
     return (
         <div style={{...STYLE}}>
-            {state.comments.get(index)}
+            Commento Lorem ipsum
+
         </div>
     )
 
 }
 
-Toolbox.propTypes = {
-    state: PropTypes.object.isRequired,
+CommentBox.propTypes = {
+    //state: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired
 };

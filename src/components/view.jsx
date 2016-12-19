@@ -4,6 +4,7 @@ import {ReactSVGPanZoom, TOOL_ZOOM_IN, TOOL_ZOOM_OUT, TOOL_PAN, TOOL_NONE, TOOL_
 
 import Comments from './comments';
 import Toolbox from './toolbox/toolbox';
+import Sidebar from './sidebar/sidebar'
 
 import {Models, State2DViewer, Catalog} from 'react-planner';
 import project from '../project/q_mura';
@@ -11,6 +12,7 @@ import MyCatalog from '../catalog/mycatalog';
 
 import {MODE_ADDING_COMMENT, MODE_PANNING} from '../constants/modes'
 import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from '../constants/zoom'
+
 
 class View extends React.Component {
 
@@ -65,11 +67,18 @@ class View extends React.Component {
                 break;
         }
 
-        return (
-            <div>
+        let sidebarWidth = 300;
 
+        return (
+            <div style={{
+                display: "flex",
+                flexFlow: "row nowrap",
+                height: this.props.containerHeight,
+                width: this.props.containerWidth
+            }}>
+                <Sidebar width={sidebarWidth} height={this.props.containerHeight}/>
                 <ReactSVGPanZoom
-                    width={this.props.containerWidth}
+                    width={this.props.containerWidth - sidebarWidth}
                     height={this.props.containerHeight}
                     ref={viewer => this.viewer = viewer}
                     onMouseDown={event => this.onMouseDown(event.x, event.y)}
@@ -77,6 +86,7 @@ class View extends React.Component {
                     onMouseMove={event => this.onMouseMove(event.x, event.y)}
                     detectAutoPan={false}
                     tool={tool}
+                    toolbarPosition={"none"}
                 >
 
                     <svg
