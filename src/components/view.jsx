@@ -67,6 +67,8 @@ class View extends React.Component {
                 break;
         }
 
+
+        //let sidebarWidth = this.props.state.isSidebarOpen ? 300 : 0;
         let sidebarWidth = 300;
 
         return (
@@ -118,7 +120,13 @@ View.propTypes = {
     enterAddingComment: PropTypes.func.isRequired,
     addComment: PropTypes.func.isRequired,
     cancelAddingComment: PropTypes.func.isRequired,
-    zoomIn: PropTypes.func.isRequired
+    explodeComment: PropTypes.func.isRequired,
+    closeComment: PropTypes.func.isRequired,
+    deleteComment: PropTypes.func.isRequired,
+    modifyComment: PropTypes.func.isRequired,
+    saveCommentText: PropTypes.func.isRequired,
+    zoomIn: PropTypes.func.isRequired,
+    zoomOut: PropTypes.func.isRequired
 };
 
 

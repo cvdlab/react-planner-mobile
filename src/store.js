@@ -6,12 +6,15 @@ import {ZOOM_LEVEL_MAX, ZOOM_LEVEL_MIN, ZOOM_START_LEVEL} from './constants/zoom
 const State = Record({
     mode: MODE_PANNING,
     comments: new List(),
-    zoomLevel: ZOOM_START_LEVEL
+    zoomLevel: ZOOM_START_LEVEL,
+    isSidebarOpen: true,
+    activeComment: -1,
+    commentIsExploded: true
 }, 'State');
 
 
 function addComment(state, x, y) {
-    let newState = state
+    let newState = state;
     let point = new Map({x, y});
     let comments = newState.comments.push(point);
     newState = newState.set('comments', comments);
@@ -26,6 +29,26 @@ function enterAddCommentMode(state) {
 function cancelAddCommentMode(state) {
     return state.set('mode', MODE_PANNING);
 }
+
+function explodeComment(state, commentIndex) {
+    let newState = state;
+    newState = newState.set('commentIsExploded', true);
+    newState = newState.set('activeComment', commentIndex);
+    return newState;
+}
+
+function closeComment(state) {
+    return state.set('activeComment', -1);
+}
+
+function deleteComment(state, commentIndex) {
+    let newState = state;
+    let comments = newState.comments;
+    newState = newState.comments.delete(commentIndex);
+    return newState;
+}
+
+//MANCANO modifyComment E saveCommentText
 
 function zoomIn(state) {
     let newZoom = state.zoomLevel + 1;
@@ -53,6 +76,15 @@ function reducer(state, action) {
             break;
         case "ADD_COMMENT":
             return addComment(state, action.x, action.y);
+            break;
+        case "EXPLODE_COMMENT":
+            return explodeComment(state, action.commentIndex);
+            break;
+        case "CLOSE_COMMENT":
+            return closeComment(state);
+            break;
+        case "DELETE_COMMENT":
+            return deleteComment(state, commentIndex);
             break;
         case "ZOOMING_IN":
             return zoomIn(state);

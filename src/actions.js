@@ -12,6 +12,48 @@ export function addCommentAction(SVGPointX, SVGPointY) {
     }
 }
 
+// export function selectCommentFromPointAction(){
+//     return {
+//         type: "SELECT_COMMENT_FROM_POINT"
+//     }
+// }
+
+export function explodeCommentAction(index) {
+    return {
+        type: "EXPLODE_COMMENT",
+        commentIndex: index
+    }
+}
+
+export function closeCommentAction() {
+    return {
+        type: "CLOSE_COMMENT"
+    }
+}
+
+export function deleteCommentAction() {
+    return {
+        type: "DELETE_COMMENT"
+    }
+}
+
+export function modifyCommentAction() {
+    return {
+        type: "MODIFY_COMMENT"
+    }
+}
+
+export function cancelModifyCommentAction() {
+    return {
+        type: "CANCEL_MODIFY_COMMENT"
+    }
+}
+
+export function saveCommentTextAction() {
+    return {
+        type: "SAVE_COMMENT_TEXT"
+    }
+}
 export function cancelAddingCommentAction() {
     return {
         type: "CANCEL_ADDING_COMMENT"
