@@ -107,6 +107,11 @@ class View extends React.Component {
                     mode={this.props.state.mode}
                     zoomOut={this.props.zoomOut}
                     zoomIn={this.props.zoomIn}/>
+
+                {/*<div style={{position:"absolute", bottom:"0px", width:"100%", height:"50%", backgroundColor:"rgba(250,250,250,0.9)", textAlign:"center"}}>*/}
+                {/*TASTIERA*/}
+                {/*</div>*/}
+
             </div>
 
         )

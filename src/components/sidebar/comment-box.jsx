@@ -1,7 +1,14 @@
 import React, {PropTypes} from 'react';
 
+import IconAlignLeft from 'react-icons/lib/fa/align-left';
+import IconTrash from 'react-icons/lib/fa/trash';
+import IconPaintBrush from 'react-icons/lib/fa/paint-brush';
+
 const STYLE = {
+    position: "relative",
     background: "#478dda",
+    height: "50px",
+    overflowY: "hidden",
     padding: 20,
     margin: "10px",
     color: "white",
@@ -10,27 +17,61 @@ const STYLE = {
 };
 
 const STYLE_ACTIVE = {
+    position: "relative",
     background: "#FEFEFE",
-    padding: 20,
+    maxHeight: "200px",
+    minHeight: "50px",
+    padding: "20px 0px 42px 0px",
     margin: "10px",
     color: "#050505",
     fontFamily: "helvetica",
     borderRadius: "2px"
 };
 
+const STYLE_BUTTON = {
+    color: "#28292D",
+    textDecoration: "none",
+    fontSize: "24px",
+    padding: "8px 14px 8px 14px",
+    display: "inline-block",
+    verticalAlign: "middle"
+};
 
-export default function CommentBox({state, index, active}) {
+export default function CommentBox({text, active, closeComment, deleteComment, modifyComment}) {
+    let truncatedText = text.substring(0, 85);
+    if (active)
+        return (
+            <div style={{... STYLE_ACTIVE}} onClick={closeComment}>
+                <div style={{maxHeight: "150px", overflow: "scroll", margin: "0px 20px 0px 20px"}}>
+                    {text}
+                </div>
+                <div style={{width: "100%", textAlign: "center", position: "absolute", bottom: "0px"}}>
 
-    return (
-        <div style={{... active ? STYLE_ACTIVE : STYLE}}>
-            Commento Lorem ipsum
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"} onClick={modifyComment}>
+                        <IconAlignLeft />
+                    </a>
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>
+                        <IconPaintBrush />
+                    </a>
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"} onClick={deleteComment}>
+                        <IconTrash />
+                    </a>
+                </div>
 
-        </div>
-    )
-
+            </div>
+        )
+    else
+        return (
+            <div style={{...  STYLE}}>
+                {truncatedText}...
+            </div>
+        )
 }
 
 CommentBox.propTypes = {
-    //state: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired
+    text: PropTypes.string.isRequired,
+    active: PropTypes.bool.isRequired,
+    closeComment: PropTypes.func.isRequired,
+    deleteThisComment: PropTypes.func.isRequired,
+    modifyThisComment: PropTypes.func.isRequired
 };
