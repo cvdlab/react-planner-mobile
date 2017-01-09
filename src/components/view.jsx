@@ -78,7 +78,7 @@ class View extends React.Component {
                 height: this.props.containerHeight,
                 width: this.props.containerWidth
             }}>
-                <Sidebar width={sidebarWidth} height={this.props.containerHeight}/>
+                <Sidebar width={sidebarWidth} height={this.props.containerHeight} comments={this.props.state.comments}/>
                 <ReactSVGPanZoom
                     width={this.props.containerWidth - sidebarWidth}
                     height={this.props.containerHeight}
@@ -96,7 +96,7 @@ class View extends React.Component {
                         height={2000}>
 
                         <State2DViewer catalog={MyCatalog} state={plannerState}/>
-                        <Comments points={this.props.state.comments}/>
+                        <Comments comments={this.props.state.comments}/>
 
                     </svg>
 
