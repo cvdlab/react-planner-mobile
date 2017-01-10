@@ -62,7 +62,7 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
         )
     else
         return (
-            <div style={{...  STYLE}} onClick={openComment}>
+            <div style={{...  STYLE}} onClick={key => openComment(key)}>
                 {truncatedText}...
             </div>
         )

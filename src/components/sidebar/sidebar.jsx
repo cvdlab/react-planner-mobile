@@ -1,29 +1,35 @@
 import React, {PropTypes} from 'react';
 import CommentBox from './comment-box';
 
-function createComment(attributes, i) {
-    return (
-        <CommentBox
-            text={attributes.get('text')}
-            active={true}
-            key={i}
-        />
-    )
-}
+class Sidebar extends React.Component {
 
-export default function Sidebar({width, height, comments}) {
+    constructor(props) {
+        super(props);
+    }
 
-    let jsx = comments.map(createComment);
+    genComment(attributes, i) {
+        return (
+            <CommentBox
+                text={attributes.get('text')}
+                active={i == this.props.activeComment}
+                key={i}
+                openComment={this.props.openCommentFn}
+            />
+        )
+    }
 
-    return (
-        <aside style={{backgroundColor: "#28292D", display: "block", overflow: "scroll", width: width, height: height}}>
+    render() {
 
-            {jsx}
+        let jsx = this.props.comments.map(this.genComment);
 
-        </aside>
+        return (
+            <aside style={{backgroundColor: "#28292D", display: "block", overflow: "scroll", width: width, height: height}}>
 
-    )
+                {jsx}
 
+            </aside>
+        )
+    }
 }
 
 /*<CommentBox
@@ -46,5 +52,7 @@ export default function Sidebar({width, height, comments}) {
 Sidebar.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    comments: PropTypes.object.isRequired
+    comments: PropTypes.object.isRequired,
+    activeComment: PropTypes.number.isRequired,
+    openCommentFn: PropTypes.func.isRequired
 };
