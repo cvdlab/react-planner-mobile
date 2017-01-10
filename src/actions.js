@@ -31,19 +31,20 @@ export function closeCommentAction() {
     }
 }
 
-export function deleteCommentAction() {
+export function deleteCommentAction(index) {
     return {
-        type: "DELETE_COMMENT"
+        type: "DELETE_COMMENT",
+        commentIndex: index
     }
 }
 
-export function modifyCommentAction() {
+export function modifyCommentTextAction() {
     return {
         type: "MODIFY_COMMENT"
     }
 }
 
-export function cancelModifyCommentAction() {
+export function cancelModifyCommentTextAction() {
     return {
         type: "CANCEL_MODIFY_COMMENT"
     }

@@ -37,7 +37,7 @@ const STYLE_BUTTON = {
     verticalAlign: "middle"
 };
 
-export default function CommentBox({text, active, openComment, deleteComment, modifyComment}) {
+export default function CommentBox({text, active, openComment, deleteComment, modifyCommentText}) {
     let truncatedText = text.substring(0, 85);
     if (active)
         return (
@@ -47,13 +47,15 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
                 </div>
                 <div style={{width: "100%", textAlign: "center", position: "absolute", bottom: "0px"}}>
 
-                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"} onClick={modifyComment}>
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}
+                       onClick={key => modifyCommentText(key)}>
                         <IconAlignLeft />
                     </a>
                     {/*<a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>*/}
                     {/*<IconPaintBrush />*/}
                     {/*</a>*/}
-                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"} onClick={deleteComment}>
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"}
+                       onClick={key => deleteComment(key)}>
                         <IconTrash />
                     </a>
                 </div>
@@ -72,6 +74,6 @@ CommentBox.propTypes = {
     text: PropTypes.string.isRequired,
     active: PropTypes.bool.isRequired,
     openComment: PropTypes.func.isRequired,
-    // deleteComment: PropTypes.func.isRequired,
-    // modifyComment: PropTypes.func.isRequired
+    deleteComment: PropTypes.func.isRequired
+    // modifyCommentText: PropTypes.func.isRequired
 };

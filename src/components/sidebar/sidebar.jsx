@@ -15,6 +15,8 @@ export default class Sidebar extends React.Component {
                 active={i == this.props.activeComment}
                 key={i}
                 openComment={event => this.props.openCommentFn(i)}
+                deleteComment={event => this.props.deleteCommentFn(i)}
+                //*modifyCommentText={event => this.props.modifyCommentTextFn(i)}
             />
         )
     }
@@ -42,24 +44,26 @@ export default class Sidebar extends React.Component {
 /*<CommentBox
  text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula malesuada condimentum. Maecenas viverra fermentum elit vitae viverra. Pellentesque porttitor nibh sed justo egestas tempor. Etiam luctus mollis laoreet. Vestibulum erat enim, vulputate eget consequat vitae, blandit nec justo. Pellentesque scelerisque risus ut eleifend ullamcorper. Praesent ut hendrerit dolor. Donec malesuada interdum lorem. Duis cursus bibendum augue, sit amet tempus ex varius consectetur. Proin feugiat, arcu id sagittis venenatis, sapien mauris varius tortor, ac blandit erat justo ac ex. Aenean tempor felis est, in auctor diam aliquet in."}
  active={true } closeComment={console.log()} deleteComment={console.log()}
- modifyComment={console.log()}/>
+ modifyCommentText={console.log()}/>
  <CommentBox
  text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula malesuada condimentum. Maecenas viverra fermentum elit vitae viverra. Pellentesque porttitor nibh sed justo egestas tempor. Etiam luctus mollis laoreet. Vestibulum erat enim, vulputate eget consequat vitae, blandit nec justo. Pellentesque scelerisque risus ut eleifend ullamcorper. Praesent ut hendrerit dolor. Donec malesuada interdum lorem. Duis cursus bibendum augue, sit amet tempus ex varius consectetur. Proin feugiat, arcu id sagittis venenatis, sapien mauris varius tortor, ac blandit erat justo ac ex. Aenean tempor felis est, in auctor diam aliquet in."}
  active={false} closeComment={console.log()} deleteComment={console.log()}
- modifyComment={console.log()}/>
+ modifyCommentText={console.log()}/>
  <CommentBox
  text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula malesuada condimentum. Maecenas viverra fermentum elit vitae viverra. Pellentesque porttitor nibh sed justo egestas tempor. Etiam luctus mollis laoreet. Vestibulum erat enim, vulputate eget consequat vitae, blandit nec justo. Pellentesque scelerisque risus ut eleifend ullamcorper. Praesent ut hendrerit dolor. Donec malesuada interdum lorem. Duis cursus bibendum augue, sit amet tempus ex varius consectetur. Proin feugiat, arcu id sagittis venenatis, sapien mauris varius tortor, ac blandit erat justo ac ex. Aenean tempor felis est, in auctor diam aliquet in."}
  active={false} closeComment={console.log()} deleteComment={console.log()}
- modifyComment={console.log()}/>
+ modifyCommentText={console.log()}/>
  <CommentBox
  text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula malesuada condimentum. Maecenas viverra fermentum elit vitae viverra. Pellentesque porttitor nibh sed justo egestas tempor. Etiam luctus mollis laoreet. Vestibulum erat enim, vulputate eget consequat vitae, blandit nec justo. Pellentesque scelerisque risus ut eleifend ullamcorper. Praesent ut hendrerit dolor. Donec malesuada interdum lorem. Duis cursus bibendum augue, sit amet tempus ex varius consectetur. Proin feugiat, arcu id sagittis venenatis, sapien mauris varius tortor, ac blandit erat justo ac ex. Aenean tempor felis est, in auctor diam aliquet in."}
  active={false} closeComment={console.log()} deleteComment={console.log()}
- modifyComment={console.log()}/>*/
+ modifyCommentText={console.log()}/>*/
 
 Sidebar.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     comments: PropTypes.object.isRequired,
     activeComment: PropTypes.number.isRequired,
-    openCommentFn: PropTypes.func.isRequired
+    openCommentFn: PropTypes.func.isRequired,
+    deleteCommentFn: PropTypes.func.isRequired
+    //modifyCommentTextFn: PropTypes.func.isRequired
 };

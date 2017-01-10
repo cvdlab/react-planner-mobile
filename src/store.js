@@ -44,12 +44,13 @@ function closeComment(state) {
 
 function deleteComment(state, commentIndex) {
     let newState = state;
-    let comments = newState.comments;
-    newState = newState.comments.delete(commentIndex);
+    let comments = newState.comments.remove(commentIndex);
+    newState = newState.set('comments', comments);
+    newState = newState.set('activeComment', -1);
     return newState;
 }
 
-//MANCANO modifyComment E saveCommentText
+//MANCANO modifyCommentText, saveCommentText, cancelModifyCommentText
 
 function zoomIn(state) {
     let newZoom = state.zoomLevel + 1;
@@ -85,7 +86,7 @@ function reducer(state, action) {
             return closeComment(state);
             break;
         case "DELETE_COMMENT":
-            return deleteComment(state, commentIndex);
+            return deleteComment(state, action.commentIndex);
             break;
         case "ZOOMING_IN":
             return zoomIn(state);

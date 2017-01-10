@@ -16,12 +16,12 @@ function mapDispatchToProps(dispatch) {
         explodeComment: bindActionCreators(actions.explodeCommentAction, dispatch),
         closeComment: bindActionCreators(actions.closeCommentAction, dispatch),
         deleteComment: bindActionCreators(actions.deleteCommentAction, dispatch),
-        modifyComment: bindActionCreators(actions.modifyCommentAction, dispatch),
+        modifyCommentText: bindActionCreators(actions.modifyCommentTextAction, dispatch),
         saveCommentText: bindActionCreators(actions.saveCommentTextAction, dispatch),
         enterAddingComment: bindActionCreators(actions.enterAddingCommentAction, dispatch),
         addComment: bindActionCreators(actions.addCommentAction, dispatch),
         cancelAddingComment: bindActionCreators(actions.cancelAddingCommentAction, dispatch),
-        cancelModifyComment: bindActionCreators(actions.cancelModifyCommentAction, dispatch),
+        cancelModifyCommentText: bindActionCreators(actions.cancelModifyCommentTextAction, dispatch),
         zoomIn: bindActionCreators(actions.zoomIn, dispatch),
         zoomOut: bindActionCreators(actions.zoomOut, dispatch)
     }
