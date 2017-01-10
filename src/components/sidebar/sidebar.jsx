@@ -1,10 +1,11 @@
 import React, {PropTypes} from 'react';
 import CommentBox from './comment-box';
 
-class Sidebar extends React.Component {
+export default class Sidebar extends React.Component {
 
     constructor(props) {
         super(props);
+        this.genComment = this.genComment.bind(this);
     }
 
     genComment(attributes, i) {
@@ -13,7 +14,7 @@ class Sidebar extends React.Component {
                 text={attributes.get('text')}
                 active={i == this.props.activeComment}
                 key={i}
-                openComment={this.props.openCommentFn}
+                openComment={event => this.props.openCommentFn(i)}
             />
         )
     }
@@ -23,7 +24,13 @@ class Sidebar extends React.Component {
         let jsx = this.props.comments.map(this.genComment);
 
         return (
-            <aside style={{backgroundColor: "#28292D", display: "block", overflow: "scroll", width: width, height: height}}>
+            <aside style={{
+                backgroundColor: "#28292D",
+                display: "block",
+                overflow: "scroll",
+                width: this.props.width,
+                height: this.props.height
+            }}>
 
                 {jsx}
 

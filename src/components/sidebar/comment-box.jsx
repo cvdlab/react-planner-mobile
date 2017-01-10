@@ -72,6 +72,6 @@ CommentBox.propTypes = {
     text: PropTypes.string.isRequired,
     active: PropTypes.bool.isRequired,
     openComment: PropTypes.func.isRequired,
-    deleteComment: PropTypes.func.isRequired,
-    modifyComment: PropTypes.func.isRequired
+    // deleteComment: PropTypes.func.isRequired,
+    // modifyComment: PropTypes.func.isRequired
 };

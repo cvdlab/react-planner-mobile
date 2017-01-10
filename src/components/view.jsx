@@ -83,7 +83,7 @@ class View extends React.Component {
                     height={this.props.containerHeight}
                     comments={this.props.state.comments}
                     activeComment={this.props.state.activeComment}
-                    openCommentFn={null}
+                    openCommentFn={this.props.explodeComment}
                 />
                 <ReactSVGPanZoom
                     width={this.props.containerWidth - sidebarWidth}
