@@ -37,11 +37,11 @@ const STYLE_BUTTON = {
     verticalAlign: "middle"
 };
 
-export default function CommentBox({text, active, closeComment, deleteComment, modifyComment}) {
+export default function CommentBox({text, active, openComment, deleteComment, modifyComment}) {
     let truncatedText = text.substring(0, 85);
     if (active)
         return (
-            <div style={{... STYLE_ACTIVE}} onClick={closeComment}>
+            <div style={{... STYLE_ACTIVE}}>
                 <div style={{maxHeight: "150px", overflow: "scroll", margin: "0px 20px 0px 20px"}}>
                     {text}
                 </div>
@@ -50,9 +50,9 @@ export default function CommentBox({text, active, closeComment, deleteComment, m
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"} onClick={modifyComment}>
                         <IconAlignLeft />
                     </a>
-                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>
-                        <IconPaintBrush />
-                    </a>
+                    {/*<a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>*/}
+                    {/*<IconPaintBrush />*/}
+                    {/*</a>*/}
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"} onClick={deleteComment}>
                         <IconTrash />
                     </a>
@@ -62,7 +62,7 @@ export default function CommentBox({text, active, closeComment, deleteComment, m
         )
     else
         return (
-            <div style={{...  STYLE}}>
+            <div style={{...  STYLE}} onClick={openComment}>
                 {truncatedText}...
             </div>
         )
@@ -71,7 +71,7 @@ export default function CommentBox({text, active, closeComment, deleteComment, m
 CommentBox.propTypes = {
     text: PropTypes.string.isRequired,
     active: PropTypes.bool.isRequired,
-    closeComment: PropTypes.func.isRequired,
-    deleteThisComment: PropTypes.func.isRequired,
-    modifyThisComment: PropTypes.func.isRequired
+    openComment: PropTypes.func.isRequired,
+    deleteComment: PropTypes.func.isRequired,
+    modifyComment: PropTypes.func.isRequired
 };
