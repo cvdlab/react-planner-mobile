@@ -66,4 +66,6 @@ Sidebar.propTypes = {
     openCommentFn: PropTypes.func.isRequired,
     deleteCommentFn: PropTypes.func.isRequired
     //modifyCommentTextFn: PropTypes.func.isRequired
+    //cancelModifyCommentTextFn: PropTypes.func.isRequired
+
 };

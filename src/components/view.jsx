@@ -5,6 +5,7 @@ import {ReactSVGPanZoom, TOOL_ZOOM_IN, TOOL_ZOOM_OUT, TOOL_PAN, TOOL_NONE, TOOL_
 import Comments from './comments';
 import Toolbox from './toolbox/toolbox';
 import Sidebar from './sidebar/sidebar'
+import CommentTextEditor from './comment-editor'
 
 import {Models, State2DViewer, Catalog} from 'react-planner';
 import project from '../project/q_mura';
@@ -116,9 +117,6 @@ class View extends React.Component {
                     zoomOut={this.props.zoomOut}
                     zoomIn={this.props.zoomIn}/>
 
-                {/*<div style={{position:"absolute", bottom:"0px", width:"100%", height:"50%", backgroundColor:"rgba(250,250,250,0.9)", textAlign:"center"}}>*/}
-                {/*TASTIERA*/}
-                {/*</div>*/}
 
             </div>
 
