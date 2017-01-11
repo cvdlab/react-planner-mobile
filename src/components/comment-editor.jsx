@@ -73,7 +73,8 @@ export default class CommentTextEditor extends React.Component {
     }
 
     handleSubmit(event) {
-        alert('Salva testo ' + this.state.value);
+        //alert('Salva testo ' + this.state.value);
+        this.props.saveCommentText(this.props.activeComment, this.props.text);
         event.preventDefault();
     }
 
@@ -110,7 +111,7 @@ export default class CommentTextEditor extends React.Component {
 CommentTextEditor.propTypes = {
 
     text: PropTypes.string.isRequired,
-    //activeComment: PropTypes.number.isRequired,
-    // saveCommentText: PropTypes.func.isRequired,
+    activeComment: PropTypes.number.isRequired,
+    saveCommentText: PropTypes.func.isRequired,
     // cancelModifyCommentText: PropTypes.func.isRequired
 };

@@ -1,18 +1,15 @@
-import React, {PropTypes} from 'react';
-import Dimensions from 'react-dimensions';
-import {ReactSVGPanZoom, TOOL_ZOOM_IN, TOOL_ZOOM_OUT, TOOL_PAN, TOOL_NONE, TOOL_AUTO} from 'react-svg-pan-zoom';
-
-import Comments from './comments';
-import Toolbox from './toolbox/toolbox';
-import Sidebar from './sidebar/sidebar'
-import CommentTextEditor from './comment-editor'
-
-import {Models, State2DViewer, Catalog} from 'react-planner';
-import project from '../project/q_mura';
-import MyCatalog from '../catalog/mycatalog';
-
-import {MODE_ADDING_COMMENT, MODE_PANNING} from '../constants/modes'
-import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from '../constants/zoom'
+import React, {PropTypes} from "react";
+import Dimensions from "react-dimensions";
+import {ReactSVGPanZoom, TOOL_PAN, TOOL_NONE} from "react-svg-pan-zoom";
+import Comments from "./comments";
+import Toolbox from "./toolbox/toolbox";
+import Sidebar from "./sidebar/sidebar";
+import CommentTextEditor from "./comment-editor";
+import {Models, State2DViewer} from "react-planner";
+import project from "../project/q_mura";
+import MyCatalog from "../catalog/mycatalog";
+import {MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT} from "../constants/modes";
+import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from "../constants/zoom";
 
 
 class View extends React.Component {
@@ -72,55 +69,66 @@ class View extends React.Component {
         //let sidebarWidth = this.props.state.isSidebarOpen ? 300 : 0;
         let sidebarWidth = 300;
 
-        return (
-            <div style={{
-                display: "flex",
-                flexFlow: "row nowrap",
-                height: this.props.containerHeight,
-                width: this.props.containerWidth
-            }}>
-                <Sidebar
-                    width={sidebarWidth}
-                    height={this.props.containerHeight}
-                    comments={this.props.state.comments}
-                    activeComment={this.props.state.activeComment}
-                    openCommentFn={this.props.explodeComment}
-                    deleteCommentFn={this.props.deleteComment}
-                    modifyCommentTextFn={this.props.modifyCommentText}
+        if (this.props.state.mode == MODE_MODIFYING_COMMENT) {
+            activeComment = this.props.state.activeComment;
+            return (
+                <CommentTextEditor
+                    text={this.props.state.comments.get(activeComment).get('text')}
+                    activeComment={activeComment}
+                    saveCommentText={this.props.saveCommentText}
                 />
-                <ReactSVGPanZoom
-                    width={this.props.containerWidth - sidebarWidth}
-                    height={this.props.containerHeight}
-                    ref={viewer => this.viewer = viewer}
-                    onMouseDown={event => this.onMouseDown(event.x, event.y)}
-                    onMouseUp={event => this.onMouseUp(event.x, event.y)}
-                    onMouseMove={event => this.onMouseMove(event.x, event.y)}
-                    detectAutoPan={false}
-                    tool={tool}
-                    toolbarPosition={"none"}
-                >
+            );
+        } else {
+            return (
+                <div style={{
+                    display: "flex",
+                    flexFlow: "row nowrap",
+                    height: this.props.containerHeight,
+                    width: this.props.containerWidth
+                }}>
+                    <Sidebar
+                        width={sidebarWidth}
+                        height={this.props.containerHeight}
+                        comments={this.props.state.comments}
+                        activeComment={this.props.state.activeComment}
+                        openCommentFn={this.props.explodeComment}
+                        deleteCommentFn={this.props.deleteComment}
+                        modifyCommentTextFn={this.props.modifyCommentText}
+                    />
+                    <ReactSVGPanZoom
+                        width={this.props.containerWidth - sidebarWidth}
+                        height={this.props.containerHeight}
+                        ref={viewer => this.viewer = viewer}
+                        onMouseDown={event => this.onMouseDown(event.x, event.y)}
+                        onMouseUp={event => this.onMouseUp(event.x, event.y)}
+                        onMouseMove={event => this.onMouseMove(event.x, event.y)}
+                        detectAutoPan={false}
+                        tool={tool}
+                        toolbarPosition={"none"}
+                    >
 
-                    <svg
-                        width={2000}
-                        height={2000}>
+                        <svg
+                            width={2000}
+                            height={2000}>
 
-                        <State2DViewer catalog={MyCatalog} state={plannerState}/>
-                        <Comments comments={this.props.state.comments}/>
+                            <State2DViewer catalog={MyCatalog} state={plannerState}/>
+                            <Comments comments={this.props.state.comments}/>
 
-                    </svg>
+                        </svg>
 
-                </ReactSVGPanZoom>
-                <Toolbox
-                    enterCommentMode={this.props.enterAddingComment}
-                    cancelCommentMode={this.props.cancelAddingComment}
-                    mode={this.props.state.mode}
-                    zoomOut={this.props.zoomOut}
-                    zoomIn={this.props.zoomIn}/>
+                    </ReactSVGPanZoom>
+                    <Toolbox
+                        enterCommentMode={this.props.enterAddingComment}
+                        cancelCommentMode={this.props.cancelAddingComment}
+                        mode={this.props.state.mode}
+                        zoomOut={this.props.zoomOut}
+                        zoomIn={this.props.zoomIn}/>
 
 
-            </div>
+                </div>
 
-        )
+            );
+        }
     }
 }
 

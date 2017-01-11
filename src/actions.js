@@ -50,9 +50,11 @@ export function cancelModifyCommentTextAction() {
     }
 }
 
-export function saveCommentTextAction() {
+export function saveCommentTextAction(index, text) {
     return {
-        type: "SAVE_COMMENT_TEXT"
+        type: "SAVE_COMMENT_TEXT",
+        commentIndex: index,
+        commentText: text
     }
 }
 export function cancelAddingCommentAction() {

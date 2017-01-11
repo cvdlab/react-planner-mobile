@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
 import {Record, List, Map} from 'immutable';
-import {MODE_PANNING, MODE_ADDING_COMMENT} from './constants/modes';
+import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT} from './constants/modes';
 import {ZOOM_LEVEL_MAX, ZOOM_LEVEL_MIN, ZOOM_START_LEVEL} from './constants/zoom'
 
 const State = Record({
@@ -18,6 +18,16 @@ function addComment(state, x, y) {
     let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula malesuada condimentum. Maecenas viverra fermentum elit vitae viverra. Pellentesque porttitor nibh sed justo egestas tempor. Etiam luctus mollis laoreet. Vestibulum erat enim, vulputate eget consequat vitae, blandit nec justo. Pellentesque scelerisque risus ut eleifend ullamcorper. Praesent ut hendrerit dolor. Donec malesuada interdum lorem. Duis cursus bibendum augue, sit amet tempus ex varius consectetur. Proin feugiat, arcu id sagittis venenatis, sapien mauris varius tortor, ac blandit erat justo ac ex. Aenean tempor felis est, in auctor diam aliquet in."
     let comment = new Map({x, y, text});
     let comments = newState.comments.push(comment);
+    newState = newState.set('comments', comments);
+    newState = newState.set('mode', MODE_PANNING);
+    return newState;
+}
+
+function saveComment(state, commentIndex, commentText){
+    let newState = state;
+    let comment = this.state.comments.get(commentIndex);
+    comment = comment.set(comment.x, comment.y, commentText);
+    let comments = newState.comments.set(commentIndex, comment);
     newState = newState.set('comments', comments);
     newState = newState.set('mode', MODE_PANNING);
     return newState;
@@ -93,6 +103,9 @@ function reducer(state, action) {
             break;
         case "ZOOMING_OUT":
             return zoomOut(state);
+            break;
+        case "SAVE_COMMENT_TEXT":
+            return saveComment(state, action.commentIndex, action.commentText);
             break;
         default:
             return state;
