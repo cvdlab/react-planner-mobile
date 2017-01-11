@@ -25,8 +25,8 @@ function addComment(state, x, y) {
 
 function saveComment(state, commentIndex, commentText){
     let newState = state;
-    let comment = this.state.comments.get(commentIndex);
-    comment = comment.set(comment.x, comment.y, commentText);
+    let comment = newState.comments.get(commentIndex);
+    comment = comment.set('text', commentText);
     let comments = newState.comments.set(commentIndex, comment);
     newState = newState.set('comments', comments);
     newState = newState.set('mode', MODE_PANNING);
@@ -50,6 +50,12 @@ function explodeComment(state, commentIndex) {
 
 function closeComment(state) {
     return state.set('activeComment', -1);
+}
+
+function modifyCommentText(state, commentIndex, commentText){
+    let newState = state;
+    newState = newState.set('mode', MODE_MODIFYING_COMMENT);
+    return newState;
 }
 
 function deleteComment(state, commentIndex) {
@@ -88,6 +94,9 @@ function reducer(state, action) {
             break;
         case "ADD_COMMENT":
             return addComment(state, action.x, action.y);
+            break;
+        case "MODIFY_COMMENT":
+            return modifyCommentText(state, action.commentIndex, action.commentText);
             break;
         case "EXPLODE_COMMENT":
             return explodeComment(state, action.commentIndex);

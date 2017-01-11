@@ -38,9 +38,11 @@ export function deleteCommentAction(index) {
     }
 }
 
-export function modifyCommentTextAction() {
+export function modifyCommentTextAction(index, text) {
     return {
-        type: "MODIFY_COMMENT"
+        type: "MODIFY_COMMENT",
+        commentIndex: index,
+        commentText: text
     }
 }
 

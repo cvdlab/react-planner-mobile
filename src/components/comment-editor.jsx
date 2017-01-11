@@ -74,7 +74,7 @@ export default class CommentTextEditor extends React.Component {
 
     handleSubmit(event) {
         //alert('Salva testo ' + this.state.value);
-        this.props.saveCommentText(this.props.activeComment, this.props.text);
+        this.props.saveCommentText(this.props.activeComment, this.state.value);
         event.preventDefault();
     }
 

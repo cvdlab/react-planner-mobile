@@ -48,7 +48,7 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
                 <div style={{width: "100%", textAlign: "center", position: "absolute", bottom: "0px"}}>
 
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}
-                       onClick={key => modifyCommentText(key)}>
+                       onClick={modifyCommentText}>
                         <IconAlignLeft />
                     </a>
                     {/*<a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>*/}
@@ -74,6 +74,6 @@ CommentBox.propTypes = {
     text: PropTypes.string.isRequired,
     active: PropTypes.bool.isRequired,
     openComment: PropTypes.func.isRequired,
-    deleteComment: PropTypes.func.isRequired
-    // modifyCommentText: PropTypes.func.isRequired
+    deleteComment: PropTypes.func.isRequired,
+    modifyCommentText: PropTypes.func.isRequired
 };

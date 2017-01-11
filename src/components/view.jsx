@@ -70,7 +70,7 @@ class View extends React.Component {
         let sidebarWidth = 300;
 
         if (this.props.state.mode == MODE_MODIFYING_COMMENT) {
-            activeComment = this.props.state.activeComment;
+            let activeComment = this.props.state.activeComment;
             return (
                 <CommentTextEditor
                     text={this.props.state.comments.get(activeComment).get('text')}
