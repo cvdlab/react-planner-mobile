@@ -39,6 +39,7 @@ const STYLE_BUTTON = {
 
 export default function CommentBox({text, active, openComment, deleteComment, modifyCommentText}) {
     let truncatedText = text.substring(0, 85);
+    if (text.length > 85) truncatedText = truncatedText.concat("...");
     if (active)
         return (
             <div style={{... STYLE_ACTIVE}}>
@@ -65,7 +66,7 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
     else
         return (
             <div style={{...  STYLE}} onClick={key => openComment(key)}>
-                {truncatedText}...
+                {truncatedText}
             </div>
         )
 }

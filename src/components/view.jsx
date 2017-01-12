@@ -76,6 +76,7 @@ class View extends React.Component {
                     text={this.props.state.comments.get(activeComment).get('text')}
                     activeComment={activeComment}
                     saveCommentText={this.props.saveCommentText}
+                    cancelModifyCommentTextFn={this.props.cancelModifyCommentText}
                 />
             );
         } else {
@@ -94,6 +95,7 @@ class View extends React.Component {
                         openCommentFn={this.props.explodeComment}
                         deleteCommentFn={this.props.deleteComment}
                         modifyCommentTextFn={this.props.modifyCommentText}
+
                     />
                     <ReactSVGPanZoom
                         width={this.props.containerWidth - sidebarWidth}
@@ -144,6 +146,7 @@ View.propTypes = {
     deleteComment: PropTypes.func.isRequired,
     modifyCommentText: PropTypes.func.isRequired,
     saveCommentText: PropTypes.func.isRequired,
+    cancelModifyCommentText: PropTypes.func.isRequired,
     zoomIn: PropTypes.func.isRequired,
     zoomOut: PropTypes.func.isRequired
 };

@@ -58,6 +58,12 @@ function modifyCommentText(state, commentIndex, commentText){
     return newState;
 }
 
+function cancelModifyCommentText(state) {
+    let newState = state;
+    newState = newState.set('mode', MODE_PANNING);
+    return newState;
+}
+
 function deleteComment(state, commentIndex) {
     let newState = state;
     let comments = newState.comments.remove(commentIndex);
@@ -95,8 +101,11 @@ function reducer(state, action) {
         case "ADD_COMMENT":
             return addComment(state, action.x, action.y);
             break;
-        case "MODIFY_COMMENT":
+        case "MODIFY_COMMENT_TEXT":
             return modifyCommentText(state, action.commentIndex, action.commentText);
+            break;
+        case "CANCEL_MODIFY_COMMENT_TEXT":
+            return cancelModifyCommentText(state);
             break;
         case "EXPLODE_COMMENT":
             return explodeComment(state, action.commentIndex);

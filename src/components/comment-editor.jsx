@@ -59,11 +59,7 @@ const STYLE_TEXTAREA = {
 export default class CommentTextEditor extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula malesuada condimentum. Maecenas viverra fermentum elit vitae viverra. Pellentesque porttitor nibh sed justo egestas tempor. Etiam luctus mollis laoreet. Vestibulum erat enim, vulputate eget consequat vitae, blandit nec justo. Pellentesque scelerisque risus ut eleifend ullamcorper. Praesent ut hendrerit dolor. Donec malesuada interdum lorem. Duis cursus bibendum augue, sit amet tempus ex varius consectetur. Proin feugiat, arcu id sagittis venenatis, sapien mauris varius tortor, ac blandit erat justo ac ex. Aenean tempor felis est, in auctor diam aliquet in."};
-
-        //this.state = {value: this.props.text};
-
+        this.state = {value: this.props.text};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -73,7 +69,6 @@ export default class CommentTextEditor extends React.Component {
     }
 
     handleSubmit(event) {
-        //alert('Salva testo ' + this.state.value);
         this.props.saveCommentText(this.props.activeComment, this.state.value);
         event.preventDefault();
     }
@@ -95,6 +90,7 @@ export default class CommentTextEditor extends React.Component {
                                 <IconCheck style={{marginTop: "22px"}}/>
                             </a>
                             <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Annulla"}
+                               onClick={event => this.props.cancelModifyCommentTextFn()}
 
                             >
                                 <IconClose style={{marginTop: "22px"}}/>
@@ -113,5 +109,5 @@ CommentTextEditor.propTypes = {
     text: PropTypes.string.isRequired,
     activeComment: PropTypes.number.isRequired,
     saveCommentText: PropTypes.func.isRequired,
-    // cancelModifyCommentText: PropTypes.func.isRequired
+    cancelModifyCommentTextFn: PropTypes.func.isRequired
 };

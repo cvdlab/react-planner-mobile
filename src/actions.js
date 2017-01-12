@@ -40,7 +40,7 @@ export function deleteCommentAction(index) {
 
 export function modifyCommentTextAction(index, text) {
     return {
-        type: "MODIFY_COMMENT",
+        type: "MODIFY_COMMENT_TEXT",
         commentIndex: index,
         commentText: text
     }
@@ -48,7 +48,7 @@ export function modifyCommentTextAction(index, text) {
 
 export function cancelModifyCommentTextAction() {
     return {
-        type: "CANCEL_MODIFY_COMMENT"
+        type: "CANCEL_MODIFY_COMMENT_TEXT"
     }
 }
 
