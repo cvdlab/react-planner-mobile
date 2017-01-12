@@ -52,7 +52,7 @@ function closeComment(state) {
     return state.set('activeComment', -1);
 }
 
-function modifyCommentText(state, commentIndex, commentText){
+function modifyCommentText(state){
     let newState = state;
     newState = newState.set('mode', MODE_MODIFYING_COMMENT);
     return newState;
@@ -96,7 +96,7 @@ function reducer(state, action) {
             return addComment(state, action.x, action.y);
             break;
         case "MODIFY_COMMENT":
-            return modifyCommentText(state, action.commentIndex, action.commentText);
+            return modifyCommentText(state);
             break;
         case "EXPLODE_COMMENT":
             return explodeComment(state, action.commentIndex);

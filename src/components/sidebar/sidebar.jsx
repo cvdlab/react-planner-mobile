@@ -16,7 +16,7 @@ export default class Sidebar extends React.Component {
                 key={i}
                 openComment={event => this.props.openCommentFn(i)}
                 deleteComment={event => this.props.deleteCommentFn(i)}
-                modifyCommentText={event => this.props.modifyCommentTextFn(i)}
+                modifyCommentText={this.props.modifyCommentTextFn}
             />
         )
     }
