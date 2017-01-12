@@ -9,7 +9,12 @@ const STYLE = {
     height: "100%",
     width: "100%",
     fontFamily: "helvetica",
-    overflow: "hidden"
+    overflow: "hidden",
+    position:"fixed",
+    top:0,
+    left:0,
+    zIndex:5
+
 
 };
 

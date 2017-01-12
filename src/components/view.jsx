@@ -10,6 +10,7 @@ import project from "../project/q_mura";
 import MyCatalog from "../catalog/mycatalog";
 import {MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT} from "../constants/modes";
 import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from "../constants/zoom";
+import If from "./react-if";
 
 
 class View extends React.Component {
@@ -69,68 +70,69 @@ class View extends React.Component {
         //let sidebarWidth = this.props.state.isSidebarOpen ? 300 : 0;
         let sidebarWidth = 300;
 
-        if (this.props.state.mode == MODE_MODIFYING_COMMENT) {
-            let activeComment = this.props.state.activeComment;
-            return (
-                <CommentTextEditor
-                    text={this.props.state.comments.get(activeComment).get('text')}
-                    activeComment={activeComment}
-                    saveCommentText={this.props.saveCommentText}
-                    cancelModifyCommentTextFn={this.props.cancelModifyCommentText}
-                />
-            );
-        } else {
-            return (
-                <div style={{
-                    display: "flex",
-                    flexFlow: "row nowrap",
-                    height: this.props.containerHeight,
-                    width: this.props.containerWidth
-                }}>
-                    <Sidebar
-                        width={sidebarWidth}
-                        height={this.props.containerHeight}
-                        comments={this.props.state.comments}
-                        activeComment={this.props.state.activeComment}
-                        openCommentFn={this.props.explodeComment}
-                        deleteCommentFn={this.props.deleteComment}
-                        modifyCommentTextFn={this.props.modifyCommentText}
 
+        let activeComment = this.props.state.activeComment;
+        let condition = this.props.state.mode == MODE_MODIFYING_COMMENT;
+        return (
+
+
+            <div style={{
+                display: "flex",
+                flexFlow: "row nowrap",
+                height: this.props.containerHeight,
+                width: this.props.containerWidth
+            }}>
+                <If condition={condition}>
+                    <CommentTextEditor
+                        text={condition ? this.props.state.comments.get(activeComment).get('text') : "CACCA"}
+                        activeComment={activeComment}
+                        saveCommentText={this.props.saveCommentText}
+                        cancelModifyCommentTextFn={this.props.cancelModifyCommentText}
                     />
-                    <ReactSVGPanZoom
-                        width={this.props.containerWidth - sidebarWidth}
-                        height={this.props.containerHeight}
-                        ref={viewer => this.viewer = viewer}
-                        onMouseDown={event => this.onMouseDown(event.x, event.y)}
-                        onMouseUp={event => this.onMouseUp(event.x, event.y)}
-                        onMouseMove={event => this.onMouseMove(event.x, event.y)}
-                        detectAutoPan={false}
-                        tool={tool}
-                        toolbarPosition={"none"}
-                    >
+                </If>
+                <Sidebar
+                    width={sidebarWidth}
+                    height={this.props.containerHeight}
+                    comments={this.props.state.comments}
+                    activeComment={this.props.state.activeComment}
+                    openCommentFn={this.props.explodeComment}
+                    deleteCommentFn={this.props.deleteComment}
+                    modifyCommentTextFn={this.props.modifyCommentText}
 
-                        <svg
-                            width={2000}
-                            height={2000}>
+                />
+                <ReactSVGPanZoom
+                    width={this.props.containerWidth - sidebarWidth}
+                    height={this.props.containerHeight}
+                    ref={viewer => this.viewer = viewer}
+                    onMouseDown={event => this.onMouseDown(event.x, event.y)}
+                    onMouseUp={event => this.onMouseUp(event.x, event.y)}
+                    onMouseMove={event => this.onMouseMove(event.x, event.y)}
+                    detectAutoPan={false}
+                    tool={tool}
+                    toolbarPosition={"none"}
+                >
 
-                            <State2DViewer catalog={MyCatalog} state={plannerState}/>
-                            <Comments comments={this.props.state.comments}/>
+                    <svg
+                        width={2000}
+                        height={2000}>
 
-                        </svg>
+                        <State2DViewer catalog={MyCatalog} state={plannerState}/>
+                        <Comments comments={this.props.state.comments}/>
 
-                    </ReactSVGPanZoom>
-                    <Toolbox
-                        enterCommentMode={this.props.enterAddingComment}
-                        cancelCommentMode={this.props.cancelAddingComment}
-                        mode={this.props.state.mode}
-                        zoomOut={this.props.zoomOut}
-                        zoomIn={this.props.zoomIn}/>
+                    </svg>
+
+                </ReactSVGPanZoom>
+                <Toolbox
+                    enterCommentMode={this.props.enterAddingComment}
+                    cancelCommentMode={this.props.cancelAddingComment}
+                    mode={this.props.state.mode}
+                    zoomOut={this.props.zoomOut}
+                    zoomIn={this.props.zoomIn}/>
 
 
-                </div>
+            </div>
 
-            );
-        }
+        );
     }
 }
 
