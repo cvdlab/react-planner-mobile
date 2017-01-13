@@ -7,7 +7,6 @@ let store = initStore();
 
 window.store=store;
 
-
 ReactDOM.render(
   <App store={store}/>,
   document.getElementById('app')

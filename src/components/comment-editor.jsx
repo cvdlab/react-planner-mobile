@@ -14,8 +14,6 @@ const STYLE = {
     top:0,
     left:0,
     zIndex:5
-
-
 };
 
 const STYLE_CENTER = {
@@ -27,7 +25,6 @@ const STYLE_CENTER = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
-
 };
 
 const STYLE_BUTTON = {
@@ -58,7 +55,7 @@ const STYLE_TEXTAREA = {
     padding: "20px 20px 20px 20px",
     boxSizing: "border-box",
     border: "3px solid rgba(0,0,0,0)",
-}
+};
 
 
 export default class CommentTextEditor extends React.Component {
@@ -84,19 +81,26 @@ export default class CommentTextEditor extends React.Component {
                 <div style={{... STYLE_CENTER}}>
 
                     <div style={{width: "100%", maxWidth: "600px", textAlign: "center", display: "inline-flex"}}>
-                            <textarea style={{... STYLE_TEXTAREA}} value={this.state.value}
-                                      onChange={this.handleChange}/>
+                            <textarea
+                                style={{... STYLE_TEXTAREA}}
+                                value={this.state.value}
+                                onChange={this.handleChange}/>
                     </div>
                     <div style={{display: "inline-flex"}}>
                         <div style={{width: "100px", textAlign: "center"}}>
-
-                            <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Salva"}
-                               onClick={this.handleSubmit}>
+                            <a
+                                href="javascript:;"
+                                style={{... STYLE_BUTTON}}
+                                title={"Salva"}
+                                onClick={this.handleSubmit}
+                            >
                                 <IconCheck style={{marginTop: "22px"}}/>
                             </a>
-                            <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Annulla"}
-                               onClick={event => this.props.cancelModifyCommentTextFn()}
-
+                            <a
+                                href="javascript:;"
+                                style={{... STYLE_BUTTON}}
+                                title={"Annulla"}
+                                onClick={event => this.props.cancelModifyCommentTextFn()}
                             >
                                 <IconClose style={{marginTop: "22px"}}/>
                             </a>
@@ -110,7 +114,6 @@ export default class CommentTextEditor extends React.Component {
 }
 
 CommentTextEditor.propTypes = {
-
     text: PropTypes.string.isRequired,
     activeComment: PropTypes.number.isRequired,
     saveCommentText: PropTypes.func.isRequired,

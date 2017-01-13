@@ -66,13 +66,11 @@ class View extends React.Component {
                 break;
         }
 
-
         //let sidebarWidth = this.props.state.isSidebarOpen ? 300 : 0;
         let sidebarWidth = 300;
 
-
         let activeComment = this.props.state.activeComment;
-        let condition = this.props.state.mode == MODE_MODIFYING_COMMENT;
+        let isModifyingComment = this.props.state.mode == MODE_MODIFYING_COMMENT;
         return (
 
 
@@ -82,9 +80,9 @@ class View extends React.Component {
                 height: this.props.containerHeight,
                 width: this.props.containerWidth
             }}>
-                <If condition={condition}>
+                <If condition={isModifyingComment}>
                     <CommentTextEditor
-                        text={condition ? this.props.state.comments.get(activeComment).get('text') : "CACCA"}
+                        text={isModifyingComment ? this.props.state.comments.get(activeComment).get('text') : "ERRORE"}
                         activeComment={activeComment}
                         saveCommentText={this.props.saveCommentText}
                         cancelModifyCommentTextFn={this.props.cancelModifyCommentText}

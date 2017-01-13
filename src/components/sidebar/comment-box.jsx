@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 import IconAlignLeft from 'react-icons/lib/fa/align-left';
 import IconTrash from 'react-icons/lib/fa/trash';
-import IconPaintBrush from 'react-icons/lib/fa/paint-brush';
+//import IconPaintBrush from 'react-icons/lib/fa/paint-brush';
 
 const STYLE = {
     position: "relative",
@@ -52,9 +52,11 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
                        onClick={modifyCommentText}>
                         <IconAlignLeft />
                     </a>
-                    {/*<a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>*/}
-                    {/*<IconPaintBrush />*/}
-                    {/*</a>*/}
+                    {/*
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>
+                    <IconPaintBrush />
+                    </a>
+                    */}
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"}
                        onClick={key => deleteComment(key)}>
                         <IconTrash />

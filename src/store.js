@@ -15,7 +15,7 @@ const State = Record({
 
 function addComment(state, x, y) {
     let newState = state;
-    let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula malesuada condimentum. Maecenas viverra fermentum elit vitae viverra. Pellentesque porttitor nibh sed justo egestas tempor. Etiam luctus mollis laoreet. Vestibulum erat enim, vulputate eget consequat vitae, blandit nec justo. Pellentesque scelerisque risus ut eleifend ullamcorper. Praesent ut hendrerit dolor. Donec malesuada interdum lorem. Duis cursus bibendum augue, sit amet tempus ex varius consectetur. Proin feugiat, arcu id sagittis venenatis, sapien mauris varius tortor, ac blandit erat justo ac ex. Aenean tempor felis est, in auctor diam aliquet in."
+    let text = "Fai tap per modificare";
     let comment = new Map({x, y, text});
     let comments = newState.comments.push(comment);
     newState = newState.set('comments', comments);
@@ -72,18 +72,14 @@ function deleteComment(state, commentIndex) {
     return newState;
 }
 
-//MANCANO modifyCommentText, saveCommentText, cancelModifyCommentText
-
 function zoomIn(state) {
     let newZoom = state.zoomLevel + 1;
-    //if (newZoom == 0) newZoom = 1;
     if (newZoom > ZOOM_LEVEL_MAX) newZoom = ZOOM_LEVEL_MAX;
     return state.set('zoomLevel', newZoom);
 }
 
 function zoomOut(state) {
     let newZoom = state.zoomLevel - 1;
-    //if (newZoom == 0) newZoom = -1;
     if (newZoom < ZOOM_LEVEL_MIN) newZoom = ZOOM_LEVEL_MIN;
     return state.set('zoomLevel', newZoom);
 }

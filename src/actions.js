@@ -12,11 +12,13 @@ export function addCommentAction(SVGPointX, SVGPointY) {
     }
 }
 
-// export function selectCommentFromPointAction(){
-//     return {
-//         type: "SELECT_COMMENT_FROM_POINT"
-//     }
-// }
+/*
+export function selectCommentFromPointAction(){
+    return {
+        type: "SELECT_COMMENT_FROM_POINT"
+    }
+}
+*/
 
 export function explodeCommentAction(index) {
     return {

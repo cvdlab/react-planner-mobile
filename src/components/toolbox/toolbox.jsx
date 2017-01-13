@@ -8,38 +8,40 @@ import {MODE_ZOOMING_IN, MODE_ZOOMING_OUT, MODE_ADDING_COMMENT, MODE_PANNING} fr
 
 import ToolboxButton from './toolbox-button';
 
-
 const STYLE = {
-    
     position: 'absolute',
     bottom: '0px',
     right: '0px',
     padding: "10px 10px 10px 10px"
-
 };
 
 export default function Toolbox({mode, enterCommentMode, cancelCommentMode, zoomOut, zoomIn }, {}) {
 
     return (
         <div style={{...STYLE}}>
-
-
-            <ToolboxButton active={[MODE_ZOOMING_IN].includes(mode)} tooltip={"Zoom in"}
-                           onClick={event => {zoomIn(); event.preventDefault();}}>
+            <ToolboxButton
+                active={[MODE_ZOOMING_IN].includes(mode)}
+                tooltip={"Zoom in"}
+                onClick={event => {zoomIn(); event.preventDefault();}}
+            >
                 <IconZoomPlus />
             </ToolboxButton>
 
-            <ToolboxButton active={[MODE_ZOOMING_OUT].includes(mode)} tooltip={"Zoom Out"}
-                           onClick={event => {zoomOut(); event.preventDefault();}}>
+            <ToolboxButton
+                active={[MODE_ZOOMING_OUT].includes(mode)}
+                tooltip={"Zoom Out"}
+                onClick={event => {zoomOut(); event.preventDefault();}}
+            >
                 <IconZoomMinus />
             </ToolboxButton>
 
-            <ToolboxButton active={[MODE_ADDING_COMMENT].includes(mode)} tooltip={"Aggiungi Commento"}
-                           onClick={event => {[MODE_PANNING].includes(mode) ? enterCommentMode() : cancelCommentMode(); event.preventDefault();}}>
+            <ToolboxButton
+                active={[MODE_ADDING_COMMENT].includes(mode)}
+                tooltip={"Aggiungi Commento"}
+                onClick={event => {[MODE_PANNING].includes(mode) ? enterCommentMode() : cancelCommentMode(); event.preventDefault();}}
+            >
                 <IconComment />
             </ToolboxButton>
-
-
         </div>
     )
 }
