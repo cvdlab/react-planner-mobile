@@ -1,3 +1,5 @@
+import {userLoginAPI, getProjectsAPI, getFileDataAPI} from './api-caller'
+
 export function enterAddingCommentAction() {
     return {
         type: "ENTER_ADDING_COMMENT"
@@ -76,5 +78,36 @@ export function zoomIn() {
 export function zoomOut() {
     return {
         type: "ZOOMING_OUT"
+    }
+}
+
+export function loadProjects() {
+    return dispatch => {
+        userLoginAPI('gag@example.com', '1111', 'http://metior-dev.geoweb.it/core/api')
+            .then(json => {
+                return getProjectsAPI(json.userID, json.id, '');
+            })
+            .then(json => {
+                console.log(json);
+                dispatch({
+                    type: "loadProjects",
+                    projects: json
+                })
+            })
+    }
+}
+export function loadFileData() {
+    return dispatch => {
+        userLoginAPI('gag@example.com', '1234567890', 'http://metior-dev.geoweb.it/core/api')
+            .then(json => {
+                return getFileDataAPI('587cae8391ea0978324ce1a7', '587cae9791ea0978324ce1a8', json.userId, json.id, 'http://metior-dev.geoweb.it/core/api');
+            })
+            .then(json => {
+                console.log(json);
+                dispatch({
+                    type: "loadFileData",
+                    projects: JSON.stringify(json)
+                })
+            })
     }
 }

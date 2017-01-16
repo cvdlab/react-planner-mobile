@@ -1,5 +1,7 @@
-import {createStore} from 'redux';
 import {Record, List, Map} from 'immutable';
+import {createStore, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
+
 import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT} from './constants/modes';
 import {ZOOM_LEVEL_MAX, ZOOM_LEVEL_MIN, ZOOM_START_LEVEL} from './constants/zoom'
 
@@ -127,6 +129,11 @@ function reducer(state, action) {
 }
 
 export function initStore() {
-  let middlewares = window.devToolsExtension ? window.devToolsExtension() : f => f;
+    let middlewares = compose(
+        applyMiddleware(thunk),
+        window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+
   return createStore(reducer, null, middlewares);
+
 }
