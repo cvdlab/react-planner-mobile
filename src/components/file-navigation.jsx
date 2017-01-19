@@ -44,6 +44,7 @@ const STYLE_UL = {
     width: "100%",
     minWidth: "400px",
     height: "220px",
+    marginLeft: "15px",
     color: "black",
     fontFamily: "helvetica",
     fontWeight: 300,
