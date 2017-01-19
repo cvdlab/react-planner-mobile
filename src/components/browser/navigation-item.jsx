@@ -7,31 +7,36 @@ const STYLE_LI = {
     borderBottom: "1px solid #ccc",
     margin: "10px",
     fontSize: "18px",
+    whiteSpace: "nowrap"
 };
 
 const STYLE_LI_ICON = {
-    float: "left",
-    margin: "0 15px 0 0"
+    margin: "-10px 15px 0 0",
+    display: "inline-block",
+    whiteSpace: "normal"
 };
 
 const STYLE_LI_TIME = {
     fontSize: "16px",
-    float: "right",
     margin: "0 0 15px 0",
-    color: "#777"
+    color: "#777",
+    display: "inline-block",
+    float: "right",
+    whiteSpace: "normal"
 };
 
 export default function NavigationItem({text, date, openItem, fileId, projectId}) {
     let isProject = fileId == 'null';
     //console.log(projectId + " " + fileId);
     let icon = isProject ? <IconFolder style={{... STYLE_LI_ICON}}/> : <IconFile style={{... STYLE_LI_ICON}}/>;
+
     return (
 
         <li style={{... STYLE_LI}} onClick={event => isProject ? openItem(projectId) : openItem(projectId, fileId)}>
             {icon}
-            <p style={{overflow: "hidden", textOverflow: "ellipsis", margin: 0}}>
+            <div style={{overflow: "hidden", textOverflow: "ellipsis", maxHeight: "22px", display: "inline-block"}}>
                 {text}
-            </p>
+            </div>
             <time style={{... STYLE_LI_TIME}}> {date} </time>
         </li>
     )
