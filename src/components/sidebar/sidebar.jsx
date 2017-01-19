@@ -1,5 +1,17 @@
 import React, {PropTypes} from 'react';
 import CommentBox from './comment-box';
+import IconOpen from 'react-icons/lib/fa/folder-open-o';
+import IconSave from 'react-icons/lib/fa/floppy-o';
+
+
+const STYLE_BUTTON = {
+    color: "#ddd",
+    textDecoration: "none",
+    fontSize: "24px",
+    padding: "8px 14px 8px 14px",
+    display: "inline-block",
+    verticalAlign: "middle"
+};
 
 export default class Sidebar extends React.Component {
 
@@ -32,11 +44,28 @@ export default class Sidebar extends React.Component {
                 display: "block",
                 overflow: "scroll",
                 width: this.props.width,
-                height: this.props.height
+                height: this.props.height,
+                paddingBottom: "48px"
             }}>
 
                 {jsx}
 
+                <div style={{
+                    background: "#2d2e33",
+                    textAlign: "center",
+                    position: "absolute",
+                    bottom: "0px",
+                    width: this.props.width
+                }}>
+
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}>
+
+                        <IconOpen />
+                    </a>
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"}>
+                        <IconSave />
+                    </a>
+                </div>
             </aside>
         )
     }
