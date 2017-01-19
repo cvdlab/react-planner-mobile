@@ -118,22 +118,6 @@ export function updateFileDataAPI(projectID, fileID, data, session, coreUrl) {
     ];
 
     return callAPI(`${coreUrl}/files/update`, 'PUT', session, params);
-
-    /** FAKE DATA **/
-    //
-    // let currentDate = new Date().toString();
-    //
-    // let fileData = {
-    //     success: true,
-    //     data: {
-    //         id: fileID,
-    //         name: 'myModifiedFile',
-    //         type: TYPE_IMAGE,
-    //         creationDate: "Mon Jun 27 2016 17:18:07 GMT+0200 (CEST)",
-    //         lastModifiedDate: currentDate
-    //     }
-    // };
-    // return Promise.resolve(fileData);
 }
 
 
