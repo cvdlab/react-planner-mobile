@@ -2,7 +2,7 @@ import {Record, List, Map} from 'immutable';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 
-import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT} from './constants/modes';
+import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER} from './constants/modes';
 import {ZOOM_LEVEL_MAX, ZOOM_LEVEL_MIN, ZOOM_START_LEVEL} from './constants/zoom'
 
 const State = Record({
@@ -11,7 +11,12 @@ const State = Record({
     zoomLevel: ZOOM_START_LEVEL,
     isSidebarOpen: true,
     activeComment: -1,
-    commentIsExploded: true
+    commentIsExploded: true,
+    selectedProjectId: 'null',
+    selectedFileId: 'null',
+    projectsList: new List(),
+    filesList: new List(),
+    projectData: new Map()
 }, 'State');
 
 
@@ -74,6 +79,23 @@ function zoomOut(state) {
     return state.set('zoomLevel', newZoom);
 }
 
+function loadProjects(state, projects) {
+    let newState = state;
+    newState = newState.set('selectedProjectId', 'null');
+    newState = newState.set('projectsList', new List(projects));
+    newState = newState.set('mode', MODE_FILE_BROWSER);
+    return newState;
+}
+
+function loadFiles(state, files, projectId) {
+    let newState = state;
+    newState = newState.set('selectedProjectId', projectId);
+    newState = newState.set('selectedFileId', 'null');
+    newState = newState.set('filesList', new List(files['files']));
+    newState = newState.set('mode', MODE_FILE_BROWSER);
+    return newState;
+}
+
 function reducer(state, action) {
     state = state || new State();
 
@@ -113,6 +135,12 @@ function reducer(state, action) {
 
         case "EXIT_FILE_BROWSER":
             return state.set('mode', MODE_PANNING);
+
+        case "LOAD_PROJECTS":
+            return loadProjects(state, action.projects);
+
+        case "LOAD_FILES":
+            return loadFiles(state, action.files, action.projectId);
 
         default:
             return state;

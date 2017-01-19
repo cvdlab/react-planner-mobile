@@ -23,7 +23,11 @@ function mapDispatchToProps(dispatch) {
         cancelAddingComment: bindActionCreators(actions.cancelAddingCommentAction, dispatch),
         cancelModifyCommentText: bindActionCreators(actions.cancelModifyCommentTextAction, dispatch),
         zoomIn: bindActionCreators(actions.zoomIn, dispatch),
-        zoomOut: bindActionCreators(actions.zoomOut, dispatch)
+        zoomOut: bindActionCreators(actions.zoomOut, dispatch),
+        exitFileBrowser: bindActionCreators(actions.exitFileBrowserAction, dispatch),
+        loadProjects: bindActionCreators(actions.loadProjects, dispatch),
+        loadFiles: bindActionCreators(actions.loadFiles, dispatch),
+        loadFileData: bindActionCreators(actions.loadFileData, dispatch)
     }
 }
 

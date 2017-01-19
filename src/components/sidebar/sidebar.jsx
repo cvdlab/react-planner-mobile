@@ -58,11 +58,15 @@ export default class Sidebar extends React.Component {
                     width: this.props.width
                 }}>
 
-                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}>
-
+                    <a
+                        href="javascript:;"
+                        style={{... STYLE_BUTTON}}
+                        title={"Apri"}
+                        onClick={event => this.props.loadProjectsFn()}>
                         <IconOpen />
                     </a>
-                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"}>
+
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Salva"}>
                         <IconSave />
                     </a>
                 </div>
@@ -78,6 +82,6 @@ Sidebar.propTypes = {
     activeComment: PropTypes.number.isRequired,
     openCommentFn: PropTypes.func.isRequired,
     deleteCommentFn: PropTypes.func.isRequired,
-    modifyCommentTextFn: PropTypes.func.isRequired
-
+    modifyCommentTextFn: PropTypes.func.isRequired,
+    loadProjectsFn: PropTypes.func.isRequired
 };

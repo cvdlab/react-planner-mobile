@@ -110,14 +110,13 @@ export function loadFiles(projectId) {
     return dispatch => {
         userLoginAPI('gag@example.com', '1234567890', 'http://metior-dev.geoweb.it/core/api')
             .then(json => {
-
                 return getProjectAPI(projectId, json.userId, json.id, 'http://metior-dev.geoweb.it/core/api');
-
             })
             .then(json => {
                 dispatch({
                     type: "LOAD_FILES",
-                    projects: json
+                    files: json,
+                    projectId: projectId
                 })
             })
     }

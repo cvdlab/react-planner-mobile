@@ -5,7 +5,7 @@ import Comments from "./comments";
 import Toolbox from "./toolbox/toolbox";
 import Sidebar from "./sidebar/sidebar";
 import CommentTextEditor from "./comment-editor";
-import FileNavigation from "./file-navigation"
+import FileNavigation from "./browser/file-navigation"
 import {Models, State2DViewer} from "react-planner";
 import project from "../project/q_mura";
 import MyCatalog from "../catalog/mycatalog";
@@ -47,15 +47,6 @@ class View extends React.Component {
         }
     }
 
-    onMouseUp(x, y) {
-
-    }
-
-    onMouseMove(x, y) {
-
-    }
-
-
     render() {
 
         let plannerState = new Models.State({scene: project});
@@ -71,7 +62,7 @@ class View extends React.Component {
 
         let activeComment = this.props.state.activeComment;
         let isModifyingComment = this.props.state.mode == MODE_MODIFYING_COMMENT;
-        let isInFileBrowser = this.props.state.mode == MODE_FILE_BROWSER;
+        let isInBrowser = this.props.state.mode == MODE_FILE_BROWSER;
         return (
 
 
@@ -89,9 +80,14 @@ class View extends React.Component {
                         cancelModifyCommentTextFn={this.props.cancelModifyCommentText}
                     />
                 </If>
-                <If condition={isInFileBrowser}>
+                <If condition={isInBrowser}>
                     <FileNavigation
-
+                        cancelOpenItem={this.props.exitFileBrowser}
+                        loadFileFn={this.props.loadFileData}
+                        loadFilesFn={this.props.loadFiles}
+                        elemList={this.props.state.selectedProjectId == 'null' ?
+                            this.props.state.projectsList : this.props.state.filesList}
+                        projectId={this.props.state.selectedProjectId}
                     />
                 </If>
                 <Sidebar
@@ -102,15 +98,13 @@ class View extends React.Component {
                     openCommentFn={this.props.explodeComment}
                     deleteCommentFn={this.props.deleteComment}
                     modifyCommentTextFn={this.props.modifyCommentText}
-
+                    loadProjectsFn={this.props.loadProjects}
                 />
                 <ReactSVGPanZoom
                     width={this.props.containerWidth - sidebarWidth}
                     height={this.props.containerHeight}
                     ref={viewer => this.viewer = viewer}
                     onMouseDown={event => this.onMouseDown(event.x, event.y)}
-                    onMouseUp={event => this.onMouseUp(event.x, event.y)}
-                    onMouseMove={event => this.onMouseMove(event.x, event.y)}
                     detectAutoPan={false}
                     tool={tool}
                     toolbarPosition={"none"}
@@ -154,7 +148,11 @@ View.propTypes = {
     saveCommentText: PropTypes.func.isRequired,
     cancelModifyCommentText: PropTypes.func.isRequired,
     zoomIn: PropTypes.func.isRequired,
-    zoomOut: PropTypes.func.isRequired
+    zoomOut: PropTypes.func.isRequired,
+    exitFileBrowser: PropTypes.func.isRequired,
+    loadProjects: PropTypes.func.isRequired,
+    loadFiles: PropTypes.func.isRequired,
+    loadFileData: PropTypes.func.isRequired
 };
 
 
