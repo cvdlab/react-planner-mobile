@@ -35,23 +35,11 @@ function saveComment(state, commentIndex, commentText){
     return newState;
 }
 
-function enterAddCommentMode(state) {
-    return state.set('mode', MODE_ADDING_COMMENT);
-}
-
-function cancelAddCommentMode(state) {
-    return state.set('mode', MODE_PANNING);
-}
-
 function explodeComment(state, commentIndex) {
     let newState = state;
     newState = newState.set('commentIsExploded', true);
     newState = newState.set('activeComment', commentIndex);
     return newState;
-}
-
-function closeComment(state) {
-    return state.set('activeComment', -1);
 }
 
 function modifyCommentText(state, commentIndex, commentText){
@@ -91,38 +79,41 @@ function reducer(state, action) {
 
     switch (action.type) {
         case "ENTER_ADDING_COMMENT":
-            return enterAddCommentMode(state);
-            break;
+            return state.set('mode', MODE_ADDING_COMMENT);
+
         case "CANCEL_ADDING_COMMENT":
-            return cancelAddCommentMode(state);
-            break;
+            return state.set('mode', MODE_PANNING);
+
         case "ADD_COMMENT":
             return addComment(state, action.x, action.y);
-            break;
+
         case "MODIFY_COMMENT_TEXT":
             return modifyCommentText(state, action.commentIndex, action.commentText);
-            break;
+
         case "CANCEL_MODIFY_COMMENT_TEXT":
             return cancelModifyCommentText(state);
-            break;
+
         case "EXPLODE_COMMENT":
             return explodeComment(state, action.commentIndex);
-            break;
+
         case "CLOSE_COMMENT":
-            return closeComment(state);
-            break;
+            return state.set('activeComment', -1);
+
         case "DELETE_COMMENT":
             return deleteComment(state, action.commentIndex);
-            break;
+
         case "ZOOMING_IN":
             return zoomIn(state);
-            break;
+
         case "ZOOMING_OUT":
             return zoomOut(state);
-            break;
+
         case "SAVE_COMMENT_TEXT":
             return saveComment(state, action.commentIndex, action.commentText);
-            break;
+
+        case "EXIT_FILE_BROWSER":
+            return state.set('mode', MODE_PANNING);
+
         default:
             return state;
     }
@@ -132,7 +123,7 @@ export function initStore() {
     let middlewares = compose(
         applyMiddleware(thunk),
         window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
+    );
 
   return createStore(reducer, null, middlewares);
 

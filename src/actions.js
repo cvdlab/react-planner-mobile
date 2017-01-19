@@ -56,6 +56,12 @@ export function cancelModifyCommentTextAction() {
     }
 }
 
+export function exitFileBrowserAction() {
+    return {
+        type: "EXIT_FILE_BROWSER"
+    }
+}
+
 export function saveCommentTextAction(index, text) {
     return {
         type: "SAVE_COMMENT_TEXT",

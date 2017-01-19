@@ -5,10 +5,11 @@ import Comments from "./comments";
 import Toolbox from "./toolbox/toolbox";
 import Sidebar from "./sidebar/sidebar";
 import CommentTextEditor from "./comment-editor";
+import FileNavigation from "./file-navigation"
 import {Models, State2DViewer} from "react-planner";
 import project from "../project/q_mura";
 import MyCatalog from "../catalog/mycatalog";
-import {MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT} from "../constants/modes";
+import {MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER} from "../constants/modes";
 import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from "../constants/zoom";
 import If from "./react-if";
 
@@ -66,11 +67,11 @@ class View extends React.Component {
                 break;
         }
 
-        //let sidebarWidth = this.props.state.isSidebarOpen ? 300 : 0;
         let sidebarWidth = 300;
 
         let activeComment = this.props.state.activeComment;
         let isModifyingComment = this.props.state.mode == MODE_MODIFYING_COMMENT;
+        let isInFileBrowser = this.props.state.mode == MODE_FILE_BROWSER;
         return (
 
 
@@ -86,6 +87,11 @@ class View extends React.Component {
                         activeComment={activeComment}
                         saveCommentText={this.props.saveCommentText}
                         cancelModifyCommentTextFn={this.props.cancelModifyCommentText}
+                    />
+                </If>
+                <If condition={isInFileBrowser}>
+                    <FileNavigation
+
                     />
                 </If>
                 <Sidebar
