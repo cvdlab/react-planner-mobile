@@ -115,7 +115,7 @@ class View extends React.Component {
                         height={2000}>
 
                         <State2DViewer catalog={MyCatalog} state={plannerState}/>
-                        <Comments comments={this.props.state.comments}/>
+                        <Comments comments={this.props.state.comments} activeComment={this.props.state.activeComment}/>
 
                     </svg>
 
