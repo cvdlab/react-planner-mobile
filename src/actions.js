@@ -135,7 +135,7 @@ export function loadFileData(projectId, fileId) {
 
                 dispatch({
                     type: "LOAD_FILE_DATA",
-                    projects: json
+                    data: json
                 });
 
             })

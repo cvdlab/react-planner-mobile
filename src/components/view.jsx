@@ -108,6 +108,7 @@ class View extends React.Component {
                     detectAutoPan={false}
                     tool={tool}
                     toolbarPosition={"none"}
+                    style={ {overflow: "hidden"}}
                 >
 
                     <svg

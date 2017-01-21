@@ -44,7 +44,7 @@ export default class Sidebar extends React.Component {
                 display: "block",
                 overflow: "scroll",
                 width: this.props.width,
-                height: this.props.height,
+                height: this.props.height - 48,
                 paddingBottom: "48px"
             }}>
 

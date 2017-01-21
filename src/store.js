@@ -1,6 +1,7 @@
-import {Record, List, Map} from 'immutable';
+import {Record, List, Mapm, fromJS} from 'immutable';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
+
 
 import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER} from './constants/modes';
 import {ZOOM_LEVEL_MAX, ZOOM_LEVEL_MIN, ZOOM_START_LEVEL} from './constants/zoom'
@@ -16,7 +17,7 @@ const State = Record({
     selectedFileId: 'null',
     projectsList: new List(),
     filesList: new List(),
-    projectData: new Map()
+    projectData: 'null'
 }, 'State');
 
 
@@ -96,6 +97,15 @@ function loadFiles(state, files, projectId) {
     return newState;
 }
 
+function loadFileData(state, data) {
+    console.log(data);
+    console.log(fromJS(data));
+    let newState = state;
+    newState = newState.set('projectData', "data");
+    newState = newState.set('mode', MODE_PANNING);
+    return newState;
+}
+
 function reducer(state, action) {
     state = state || new State();
 
@@ -141,6 +151,9 @@ function reducer(state, action) {
 
         case "LOAD_FILES":
             return loadFiles(state, action.files, action.projectId);
+
+        case "LOAD_FILE_DATA":
+            return loadFileData(state, action.data);
 
         default:
             return state;
