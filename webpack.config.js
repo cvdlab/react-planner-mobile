@@ -21,7 +21,14 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel'
-      }
+      },
+        {
+            test: /\.(jpe?g|png|gif|mtl|obj)$/i,
+            include: /src\/catalog/,
+            loaders: [
+                'file?hash=sha512&digest=hex&name=[path][name].[ext]?[hash]&context=demo/src',
+            ]
+        }
     ]
   },
   plugins: [

@@ -1,6 +1,6 @@
 import React from 'react';
-
-import {loadObjWithMaterial} from '../../../utils/load-obj';
+import * as Three from 'three';
+import {loadObjWithMaterial} from '../../utils/load-obj';
 import path from 'path';
 
 export default {
@@ -8,6 +8,7 @@ export default {
   prototype: "holes",
 
   info: {
+    title: "sash window",
     tag: ['window'],
     group: "Vertical closure",
     description: "Sash window",
@@ -63,5 +64,39 @@ export default {
         <line key="2" x1={holeWidth / 2} y1={-10 - epsilon} x2={holeWidth / 2} y2={10 + epsilon} style={holeStyle}/>
       </g>
     );
+  },
+
+  render3D: function (element, layer, scene) {
+    let onLoadItem = (object) => {
+      let boundingBox = new Three.Box3().setFromObject(object);
+
+      let initialWidth = boundingBox.max.x - boundingBox.min.x;
+      let initialHeight = boundingBox.max.y - boundingBox.min.y;
+      let initialThickness = boundingBox.max.z - boundingBox.min.z;
+
+      if (element.selected) {
+        let box = new Three.BoxHelper(object, 0x99c3fb);
+        box.material.linewidth = 2;
+        box.material.depthTest = false;
+        box.renderOrder = 1000;
+        object.add(box);
+      }
+
+      let width = element.properties.get('width').get('length');
+      let height = element.properties.get('height').get('length');
+      let thickness = element.properties.get('thickness').get('length');
+
+      object.scale.set(width / initialWidth, height / initialHeight,
+        thickness / initialThickness);
+
+      return object;
+    };
+
+    let mtl = require('./sash-window.mtl');
+    let obj = require('./sash-window.obj');
+    let img = require('./texture.png');
+
+    return loadObjWithMaterial(mtl, obj, path.dirname(img) + '/')
+      .then(object => onLoadItem(object))
   }
 };

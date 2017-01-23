@@ -1,5 +1,5 @@
 import * as Three from 'three';
-import {loadObjWithMaterial} from '../../../utils/load-obj';
+import {loadObjWithMaterial} from '../../utils/load-obj';
 import path from 'path';
 import convert from 'convert-units';
 
@@ -14,6 +14,7 @@ export default {
   prototype: "items",
 
   info: {
+    title: "sofa",
     tag: ['furnishings', 'leather'],
     group: "Items",
     description: "Leather sofa",
@@ -40,7 +41,52 @@ export default {
         </text>
       </g>
     );
-  }
+  },
 
+  render3D: function (element, layer, scene) {
+
+    let width = {length: 180, unit: 'cm'};
+    let depth = {length: 60, unit: 'cm'};
+    let height = {length: 70, unit: 'cm'};
+
+    let onLoadItem = (object) => {
+
+      let newWidth = convert(width.length).from(width.unit).to(scene.unit);
+      let newHeight = convert(height.length).from(height.unit).to(scene.unit);
+      let newDepth = convert(depth.length).from(depth.unit).to(scene.unit);
+
+      object.scale.set(newWidth / width.length, newHeight / height.length, newDepth / depth.length);
+
+      if (element.selected) {
+        let box = new Three.BoxHelper(object, 0x99c3fb);
+        box.material.linewidth = 2;
+        box.material.depthTest = false;
+        box.renderOrder = 1000;
+        object.add(box);
+      }
+
+      // Normalize the origin of this item
+      let boundingBox = new Three.Box3().setFromObject(object);
+
+      let center = [
+        (boundingBox.max.x - boundingBox.min.x) / 2 + boundingBox.min.x,
+        (boundingBox.max.y - boundingBox.min.y) / 2 + boundingBox.min.y,
+        (boundingBox.max.z - boundingBox.min.z) / 2 + boundingBox.min.z];
+
+      object.position.x -= center[0];
+      object.position.y -= center[1] - (boundingBox.max.y - boundingBox.min.y) / 2;
+      object.position.z -= center[2];
+
+
+      return object;
+    };
+
+    let mtl = require('./sofa.mtl');
+    let obj = require('./sofa.obj');
+    let img = require('./texture.jpg');
+
+    return loadObjWithMaterial(mtl, obj, path.dirname(img) + '/')
+      .then(object => onLoadItem(object))
+  }
 
 };
