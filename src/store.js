@@ -14,8 +14,8 @@ const State = Record({
     isSidebarOpen: true,
     activeComment: -1,
     commentIsExploded: true,
-    username: null,
-    password: null,
+    userId: null,
+    token: null,
     selectedProjectId: 'null',
     selectedFileId: 'null',
     projectsList: new List(),
@@ -109,12 +109,12 @@ function loadFileData(state, data) {
     return newState;
 }
 
-function storeUserInfo(state, user, password, projects) {
+function storeUserInfo(state, userId, token, projects) {
 
     let newState = state;
 
-    newState = newState.set('username', user);
-    newState = newState.set('password', password);
+    newState = newState.set('userId', user);
+    newState = newState.set('token', token);
     newState = newState.set('selectedProjectId', 'null');
     newState = newState.set('projectsList', fromJS(projects));
     newState = newState.set('mode', MODE_FILE_BROWSER);
@@ -173,7 +173,7 @@ function reducer(state, action) {
             return loadFileData(state, action.data);
 
         case "STORE_USER_INFO":
-            return storeUserInfo(state, action.username, action.password, action.projects);
+            return storeUserInfo(state, action.userId, action.token, action.projects);
 
         default:
             return state;
