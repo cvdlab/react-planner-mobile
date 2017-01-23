@@ -113,7 +113,7 @@ function storeUserInfo(state, userId, token, projects) {
 
     let newState = state;
 
-    newState = newState.set('userId', user);
+    newState = newState.set('userId', userId);
     newState = newState.set('token', token);
     newState = newState.set('selectedProjectId', 'null');
     newState = newState.set('projectsList', fromJS(projects));

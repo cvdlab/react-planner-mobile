@@ -4,11 +4,12 @@ import {ReactSVGPanZoom, TOOL_PAN, TOOL_NONE} from "react-svg-pan-zoom";
 import Comments from "./comments";
 import Toolbox from "./toolbox/toolbox";
 import Sidebar from "./sidebar/sidebar";
+import LoginForm from "./login";
 import CommentTextEditor from "./comment-editor";
 import FileNavigation from "./browser/file-navigation"
 import {Models, State2DViewer} from "react-planner";
 import MyCatalog from "../catalog/mycatalog";
-import {MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER} from "../constants/modes";
+import {MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER, MODE_USER_LOGIN} from "../constants/modes";
 import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from "../constants/zoom";
 import If from "./react-if";
 
@@ -64,6 +65,7 @@ class View extends React.Component {
         let activeComment = this.props.state.activeComment;
         let isModifyingComment = this.props.state.mode == MODE_MODIFYING_COMMENT;
         let isInBrowser = this.props.state.mode == MODE_FILE_BROWSER;
+        let isInLoginScreen = this.props.state.mode == MODE_USER_LOGIN;
         return (
 
 
@@ -90,6 +92,9 @@ class View extends React.Component {
                             this.props.state.projectsList : this.props.state.filesList}
                         projectId={this.props.state.selectedProjectId}
                     />
+                </If>
+                <If condition={isInLoginScreen}>
+                    <LoginForm storeUserInfoFn={this.props.storeUserInfo} />
                 </If>
                 <Sidebar
                     width={sidebarWidth}
