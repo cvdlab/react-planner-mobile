@@ -90,18 +90,14 @@ export function zoomOut() {
 export function loadProjects() {
     return (dispatch, getState) => {
         let state = getState();
-        userLoginAPI(state.username, state.password, 'http://metior-dev.geoweb.it/core/api')
-            .then(json => {
 
-                return getProjectsAPI(json.userId, json.id, 'http://metior-dev.geoweb.it/core/api');
-
-            })
+        getProjectsAPI(state.userId, state.token, 'http://metior-dev.geoweb.it/core/api')
             .then(json => {
 
                 dispatch({
                     type: "LOAD_PROJECTS",
                     projects: json
-                })
+                });
             })
     }
 }
@@ -110,16 +106,15 @@ export function loadFiles(projectId) {
 
     return (dispatch, getState) => {
         let state = getState();
-        userLoginAPI(state.username, state.password, 'http://metior-dev.geoweb.it/core/api')
+
+        getProjectAPI(projectId, state.userId, state.token, 'http://metior-dev.geoweb.it/core/api')
             .then(json => {
-                return getProjectAPI(projectId, json.userId, json.id, 'http://metior-dev.geoweb.it/core/api');
-            })
-            .then(json => {
+
                 dispatch({
                     type: "LOAD_FILES",
                     files: json,
                     projectId: projectId
-                })
+                });
             })
     }
 }
@@ -128,12 +123,7 @@ export function loadFileData(projectId, fileId) {
 
     return (dispatch, getState) => {
         let state = getState();
-        userLoginAPI(state.username, state.password, 'http://metior-dev.geoweb.it/core/api')
-            .then(json => {
-
-                return getFileDataAPI(projectId, fileId, json.userId, json.id, 'http://metior-dev.geoweb.it/core/api');
-
-            })
+         getFileDataAPI(projectId, fileId, state.userId, state.token, 'http://metior-dev.geoweb.it/core/api')
             .then(json => {
 
                 dispatch({
@@ -149,12 +139,7 @@ export function updateFileData(projectId, fileId, data) {
 
     return (dispatch, getState) => {
         let state = getState();
-        userLoginAPI(state.username, state.password, 'http://metior-dev.geoweb.it/core/api')
-            .then(json => {
-
-                return updateFileDataAPI(projectId, fileId, data, json.id, 'http://metior-dev.geoweb.it/core/api');
-
-            })
+        updateFileDataAPI(projectId, fileId, data, state.token, 'http://metior-dev.geoweb.it/core/api')
             .then(json => {
 
                 dispatch({
@@ -180,9 +165,9 @@ export function storeUserInfoAction(username, password) {
                 dispatch({
                     type: "STORE_USER_INFO",
                     projects: json,
-                    username: username,
-                    password: password
-                })
+                    token: json.id,
+                    userId: json.userId
+                });
             })
     }
 }
