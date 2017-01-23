@@ -2,6 +2,7 @@ import React, {PropTypes} from "react";
 import Dimensions from "react-dimensions";
 import {ReactSVGPanZoom, TOOL_PAN, TOOL_NONE} from "react-svg-pan-zoom";
 import Comments from "./comments";
+import LoginForm from "./login";
 import Toolbox from "./toolbox/toolbox";
 import Sidebar from "./sidebar/sidebar";
 import LoginForm from "./login";
@@ -75,6 +76,8 @@ class View extends React.Component {
                 height: this.props.containerHeight,
                 width: this.props.containerWidth
             }}>
+
+
                 <If condition={isModifyingComment}>
                     <CommentTextEditor
                         text={isModifyingComment ? this.props.state.comments.get(activeComment).get('text') : "ERRORE"}
