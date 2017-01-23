@@ -154,7 +154,8 @@ View.propTypes = {
     exitFileBrowser: PropTypes.func.isRequired,
     loadProjects: PropTypes.func.isRequired,
     loadFiles: PropTypes.func.isRequired,
-    loadFileData: PropTypes.func.isRequired
+    loadFileData: PropTypes.func.isRequired,
+    storeUserInfo: PropTypes.func.isRequired
 };
 
 

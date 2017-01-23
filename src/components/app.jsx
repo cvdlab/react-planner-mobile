@@ -27,7 +27,8 @@ function mapDispatchToProps(dispatch) {
         exitFileBrowser: bindActionCreators(actions.exitFileBrowserAction, dispatch),
         loadProjects: bindActionCreators(actions.loadProjects, dispatch),
         loadFiles: bindActionCreators(actions.loadFiles, dispatch),
-        loadFileData: bindActionCreators(actions.loadFileData, dispatch)
+        loadFileData: bindActionCreators(actions.loadFileData, dispatch),
+        storeUserInfo: bindActionCreators(actions.storeUserInfoAction, dispatch)
     }
 }
 

@@ -4,16 +4,18 @@ import thunk from 'redux-thunk';
 import {Models} from "react-planner";
 
 
-import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER} from './constants/modes';
+import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER, MODE_USER_LOGIN} from './constants/modes';
 import {ZOOM_LEVEL_MAX, ZOOM_LEVEL_MIN, ZOOM_START_LEVEL} from './constants/zoom'
 
 const State = Record({
-    mode: MODE_PANNING,
+    mode: MODE_USER_LOGIN,
     comments: new List(),
     zoomLevel: ZOOM_START_LEVEL,
     isSidebarOpen: true,
     activeComment: -1,
     commentIsExploded: true,
+    username: null,
+    password: null,
     selectedProjectId: 'null',
     selectedFileId: 'null',
     projectsList: new List(),
@@ -107,6 +109,20 @@ function loadFileData(state, data) {
     return newState;
 }
 
+function storeUserInfo(state, user, password, projects) {
+
+    let newState = state;
+
+    newState = newState.set('username', user);
+    newState = newState.set('password', password);
+    newState = newState.set('selectedProjectId', 'null');
+    newState = newState.set('projectsList', fromJS(projects));
+    newState = newState.set('mode', MODE_FILE_BROWSER);
+    return newState;
+
+}
+
+
 function reducer(state, action) {
     state = state || new State();
 
@@ -155,6 +171,9 @@ function reducer(state, action) {
 
         case "LOAD_FILE_DATA":
             return loadFileData(state, action.data);
+
+        case "STORE_USER_INFO":
+            return storeUserInfo(state, action.username, action.password, action.projects);
 
         default:
             return state;
