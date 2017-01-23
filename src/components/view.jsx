@@ -7,7 +7,6 @@ import Sidebar from "./sidebar/sidebar";
 import CommentTextEditor from "./comment-editor";
 import FileNavigation from "./browser/file-navigation"
 import {Models, State2DViewer} from "react-planner";
-import project from "../project/q_mura";
 import MyCatalog from "../catalog/mycatalog";
 import {MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER} from "../constants/modes";
 import {ZOOM_IN_DELTA, ZOOM_OUT_DELTA, ZOOM_START_LEVEL} from "../constants/zoom";
@@ -20,6 +19,7 @@ class View extends React.Component {
         super(props);
         this.viewer = null;
         this.zoomLevel = ZOOM_START_LEVEL;
+        this.blankProject = new Models.State();
     }
 
     componentDidMount() {
@@ -49,7 +49,8 @@ class View extends React.Component {
 
     render() {
 
-        let plannerState = new Models.State({scene: project});
+
+        let plannerState = this.props.state.projectData == 'null' ? this.blankProject : this.props.state.projectData;
 
         let tool = TOOL_PAN;
         switch (this.props.state.mode) {

@@ -72,11 +72,11 @@ export default class FileNavigation extends React.Component {
 
         return (
             <NavigationItem
-                text={attributes['name']}
-                date={attributes['modified']}
+                text={attributes.get('name')}
+                date={attributes.get('modified')}
                 openItem={this.isProjectsList ? this.props.loadFilesFn : this.props.loadFileFn}
-                projectId={this.isProjectsList ? attributes['id'] : this.props.projectId}
-                fileId={this.isProjectsList ? 'null' : attributes['id']}
+                projectId={this.isProjectsList ? attributes.get('id') : this.props.projectId}
+                fileId={this.isProjectsList ? 'null' : attributes.get('id')}
                 key={i}
             />
         )

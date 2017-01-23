@@ -25,9 +25,9 @@ function callAPI(uri, method, sessionToken, params) {
             return Promise.resolve({message: "Operazione eseguita correttamente", statusCode: 200});
         }
         if ((fetchResponse.status === 200) && fetchResponse.ok) {
-            if (uri.indexOf('download-file') !== -1) {
-                return fetchResponse.blob();
-            }
+            /*if (uri.indexOf('download-file') !== -1) {
+                return fetchResponse.blob(;
+            }*/
             return fetchResponse.json();
         }
         return new Promise((resolve, reject) => {

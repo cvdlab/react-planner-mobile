@@ -1,6 +1,7 @@
-import {Record, List, Mapm, fromJS} from 'immutable';
+import {Record, List, Map, fromJS} from 'immutable';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
+import {Models} from "react-planner";
 
 
 import {MODE_PANNING, MODE_ADDING_COMMENT, MODE_MODIFYING_COMMENT, MODE_FILE_BROWSER} from './constants/modes';
@@ -83,7 +84,7 @@ function zoomOut(state) {
 function loadProjects(state, projects) {
     let newState = state;
     newState = newState.set('selectedProjectId', 'null');
-    newState = newState.set('projectsList', new List(projects));
+    newState = newState.set('projectsList', fromJS(projects));
     newState = newState.set('mode', MODE_FILE_BROWSER);
     return newState;
 }
@@ -92,17 +93,17 @@ function loadFiles(state, files, projectId) {
     let newState = state;
     newState = newState.set('selectedProjectId', projectId);
     newState = newState.set('selectedFileId', 'null');
-    newState = newState.set('filesList', new List(files['files']));
+    newState = newState.set('filesList', fromJS(files['files']));
     newState = newState.set('mode', MODE_FILE_BROWSER);
     return newState;
 }
 
 function loadFileData(state, data) {
-    console.log(data);
-    console.log(fromJS(data));
+
     let newState = state;
-    newState = newState.set('projectData', "data");
+    newState = newState.set('projectData', new Models.State({scene: data}));
     newState = newState.set('mode', MODE_PANNING);
+
     return newState;
 }
 
