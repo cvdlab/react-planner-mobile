@@ -22,7 +22,8 @@ const STYLE_CENTER = {
     position: "relative",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding:"12px"
 };
 
 const STYLE_BUTTON = {
@@ -44,7 +45,6 @@ const STYLE_UL = {
     width: "100%",
     minWidth: "400px",
     height: "220px",
-    marginLeft: "15px",
     color: "black",
     fontFamily: "helvetica",
     fontWeight: 300,
@@ -89,7 +89,7 @@ export default class FileNavigation extends React.Component {
 
         let button = this.props.mustDisplayCancelButton ? (
             <div style={{display: "inline-flex"}}>
-                <div style={{width: "100px", textAlign: "center"}}>
+                <div style={{width: "80px", textAlign: "center"}}>
 
                     <a
                         href="javascript:"
