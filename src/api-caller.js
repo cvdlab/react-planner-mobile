@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 function callAPI(uri, method, sessionToken, params) {
 
     let requestObject = {
