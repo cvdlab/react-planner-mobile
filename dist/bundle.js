@@ -23449,7 +23449,8 @@
 	                        text: isModifyingComment ? this.props.state.comments.get(activeComment).get('text') : "ERRORE",
 	                        activeComment: activeComment,
 	                        saveCommentText: this.props.saveCommentText,
-	                        cancelModifyCommentTextFn: this.props.cancelModifyCommentText
+	                        cancelModifyCommentTextFn: this.props.cancelModifyCommentText,
+	                        containerHeight: this.props.containerHeight
 	                    })
 	                ),
 	                _react2.default.createElement(
@@ -28409,7 +28410,7 @@
 	    padding: "10px"
 	};
 	
-	var STYLE_BUTTON = {
+	var STYLE_BUTTON_BIG = {
 	    color: "white",
 	    width: "70px",
 	    height: "70px",
@@ -28423,10 +28424,24 @@
 	    margin: "14px 12px 14px 12px"
 	};
 	
+	var STYLE_BUTTON_SMALL = {
+	    color: "white",
+	    width: "48px",
+	    height: "48px",
+	    borderRadius: "24px",
+	    textDecoration: "none",
+	    display: "inline-block",
+	    alignItems: "center",
+	    justifyContent: "center",
+	    fontSize: "17px",
+	    backgroundColor: "#478dda",
+	    margin: "7px 6px 7px 6px"
+	};
+	
 	var STYLE_TEXTAREA = {
 	    width: "100%",
 	    height: "auto",
-	    minHeight: "160spx",
+	    minHeight: "120px",
 	    maxHeight: "220px",
 	    color: "black",
 	    fontFamily: "helvetica",
@@ -28475,6 +28490,7 @@
 	        value: function render() {
 	            var _this2 = this;
 	
+	            var isSmall = this.props.containerHeight < 400;
 	            return _react2.default.createElement(
 	                'div',
 	                { style: _extends({}, STYLE) },
@@ -28488,7 +28504,7 @@
 	                            ref: function ref(input) {
 	                                _this2.textareain = input;
 	                            },
-	                            style: _extends({}, STYLE_TEXTAREA),
+	                            style: _extends({}, STYLE_TEXTAREA, isSmall ? { height: "120px" } : { height: "220px" }),
 	                            value: this.state.value,
 	                            onChange: this.handleChange })
 	                    ),
@@ -28502,23 +28518,23 @@
 	                                'a',
 	                                {
 	                                    href: 'javascript:;',
-	                                    style: _extends({}, STYLE_BUTTON),
+	                                    style: _extends({}, isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG),
 	                                    title: "Salva",
 	                                    onClick: this.handleSubmit
 	                                },
-	                                _react2.default.createElement(_check2.default, { style: { marginTop: "22px" } })
+	                                _react2.default.createElement(_check2.default, { style: _extends({}, isSmall ? { marginTop: "16px" } : { marginTop: "22px" }) })
 	                            ),
 	                            _react2.default.createElement(
 	                                'a',
 	                                {
 	                                    href: 'javascript:;',
-	                                    style: _extends({}, STYLE_BUTTON),
+	                                    style: _extends({}, isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG),
 	                                    title: "Annulla",
 	                                    onClick: function onClick(event) {
 	                                        return _this2.props.cancelModifyCommentTextFn();
 	                                    }
 	                                },
-	                                _react2.default.createElement(_close2.default, { style: { marginTop: "22px" } })
+	                                _react2.default.createElement(_close2.default, { style: _extends({}, isSmall ? { marginTop: "16px" } : { marginTop: "22px" }) })
 	                            )
 	                        )
 	                    )
@@ -28537,6 +28553,7 @@
 	    text: _react.PropTypes.string.isRequired,
 	    activeComment: _react.PropTypes.number.isRequired,
 	    saveCommentText: _react.PropTypes.func.isRequired,
+	    containerHeight: _react.PropTypes.number.isRequired,
 	    cancelModifyCommentTextFn: _react.PropTypes.func.isRequired
 	};
 

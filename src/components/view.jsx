@@ -83,6 +83,7 @@ class View extends React.Component {
                         activeComment={activeComment}
                         saveCommentText={this.props.saveCommentText}
                         cancelModifyCommentTextFn={this.props.cancelModifyCommentText}
+                        containerHeight={this.props.containerHeight}
                     />
                 </If>
                 <If condition={isInBrowser}>

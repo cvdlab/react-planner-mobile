@@ -28,7 +28,7 @@ const STYLE_CENTER = {
     padding:"10px"
 };
 
-const STYLE_BUTTON = {
+const STYLE_BUTTON_BIG = {
     color: "white",
     width: "70px",
     height: "70px",
@@ -42,11 +42,25 @@ const STYLE_BUTTON = {
     margin: "14px 12px 14px 12px"
 };
 
+const STYLE_BUTTON_SMALL = {
+    color: "white",
+    width: "48px",
+    height: "48px",
+    borderRadius: "24px",
+    textDecoration: "none",
+    display: "inline-block",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "17px",
+    backgroundColor: "#478dda",
+    margin: "7px 6px 7px 6px"
+};
+
 
 const STYLE_TEXTAREA = {
     width: "100%",
     height: "auto",
-    minHeight: "160spx",
+    minHeight: "120px",
     maxHeight: "220px",
     color: "black",
     fontFamily: "helvetica",
@@ -84,6 +98,7 @@ export default class CommentTextEditor extends React.Component {
 
 
     render() {
+        let isSmall = this.props.containerHeight < 400;
         return (
             <div style={{... STYLE}}>
                 <div style={{... STYLE_CENTER}}>
@@ -91,7 +106,7 @@ export default class CommentTextEditor extends React.Component {
                     <div style={{width: "100%", maxWidth: "600px", height: "auto",textAlign: "center", display: "inline-flex"}}>
                             <textarea
                                 ref={(input) => { this.textareain = input;}}
-                                style={{... STYLE_TEXTAREA}}
+                                style={{...  STYLE_TEXTAREA, ... isSmall ? {height:"120px" }: {height:"220px"}  }}
                                 value={this.state.value}
                                 onChange={this.handleChange}/>
                     </div>
@@ -99,19 +114,19 @@ export default class CommentTextEditor extends React.Component {
                         <div style={{width: "83px", textAlign: "center"}}>
                             <a
                                 href="javascript:;"
-                                style={{... STYLE_BUTTON}}
+                                style={{...  isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG}}
                                 title={"Salva"}
                                 onClick={this.handleSubmit}
                             >
-                                <IconCheck style={{marginTop: "22px"}}/>
+                                <IconCheck style={{... isSmall ? {marginTop: "16px"} : {marginTop: "22px"}}}/>
                             </a>
                             <a
                                 href="javascript:;"
-                                style={{... STYLE_BUTTON}}
+                                style={{...  isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG}}
                                 title={"Annulla"}
                                 onClick={event => this.props.cancelModifyCommentTextFn()}
                             >
-                                <IconClose style={{marginTop: "22px"}}/>
+                                <IconClose style={{... isSmall ? {marginTop: "16px"} : {marginTop: "22px"}}}/>
                             </a>
                         </div>
                     </div>
@@ -126,5 +141,6 @@ CommentTextEditor.propTypes = {
     text: PropTypes.string.isRequired,
     activeComment: PropTypes.number.isRequired,
     saveCommentText: PropTypes.func.isRequired,
+    containerHeight: PropTypes.number.isRequired,
     cancelModifyCommentTextFn: PropTypes.func.isRequired
 };
