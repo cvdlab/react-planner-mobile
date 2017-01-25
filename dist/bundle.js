@@ -23428,7 +23428,7 @@
 	                    break;
 	            }
 	
-	            var sidebarWidth = 300;
+	            var sidebarWidth = 75 + this.props.containerWidth / 4.8;
 	
 	            var activeComment = this.props.state.activeComment;
 	            var isModifyingComment = this.props.state.mode == _modes.MODE_MODIFYING_COMMENT;
@@ -28425,7 +28425,9 @@
 	
 	var STYLE_TEXTAREA = {
 	    width: "100%",
-	    height: "220px",
+	    height: "auto",
+	    minHeight: "160spx",
+	    maxHeight: "220px",
 	    color: "black",
 	    fontFamily: "helvetica",
 	    fontWeight: 500,
@@ -28453,6 +28455,11 @@
 	    }
 	
 	    _createClass(CommentTextEditor, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.textareain.focus();
+	        }
+	    }, {
 	        key: 'handleChange',
 	        value: function handleChange(event) {
 	            this.setState({ value: event.target.value });
@@ -28476,8 +28483,11 @@
 	                    { style: _extends({}, STYLE_CENTER) },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { style: { width: "100%", maxWidth: "600px", textAlign: "center", display: "inline-flex" } },
+	                        { style: { width: "100%", maxWidth: "600px", height: "auto", textAlign: "center", display: "inline-flex" } },
 	                        _react2.default.createElement('textarea', {
+	                            ref: function ref(input) {
+	                                _this2.textareain = input;
+	                            },
 	                            style: _extends({}, STYLE_TEXTAREA),
 	                            value: this.state.value,
 	                            onChange: this.handleChange })

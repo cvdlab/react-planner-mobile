@@ -45,7 +45,9 @@ const STYLE_BUTTON = {
 
 const STYLE_TEXTAREA = {
     width: "100%",
-    height: "220px",
+    height: "auto",
+    minHeight: "160spx",
+    maxHeight: "220px",
     color: "black",
     fontFamily: "helvetica",
     fontWeight: 500,
@@ -67,6 +69,10 @@ export default class CommentTextEditor extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount(){
+        this.textareain.focus();
+    }
+
     handleChange(event) {
         this.setState({value: event.target.value});
     }
@@ -76,13 +82,15 @@ export default class CommentTextEditor extends React.Component {
         event.preventDefault();
     }
 
+
     render() {
         return (
             <div style={{... STYLE}}>
                 <div style={{... STYLE_CENTER}}>
 
-                    <div style={{width: "100%", maxWidth: "600px", textAlign: "center", display: "inline-flex"}}>
+                    <div style={{width: "100%", maxWidth: "600px", height: "auto",textAlign: "center", display: "inline-flex"}}>
                             <textarea
+                                ref={(input) => { this.textareain = input;}}
                                 style={{... STYLE_TEXTAREA}}
                                 value={this.state.value}
                                 onChange={this.handleChange}/>

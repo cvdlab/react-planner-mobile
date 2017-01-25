@@ -60,7 +60,7 @@ class View extends React.Component {
                 break;
         }
 
-        let sidebarWidth = 300;
+        let sidebarWidth = 75 + this.props.containerWidth/4.8;
 
         let activeComment = this.props.state.activeComment;
         let isModifyingComment = this.props.state.mode == MODE_MODIFYING_COMMENT;
