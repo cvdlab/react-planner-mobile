@@ -24,7 +24,8 @@ const STYLE_CENTER = {
     textAlign: "center",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding:"10px"
 };
 
 const STYLE_BUTTON = {
@@ -87,7 +88,7 @@ export default class CommentTextEditor extends React.Component {
                                 onChange={this.handleChange}/>
                     </div>
                     <div style={{display: "inline-flex"}}>
-                        <div style={{width: "100px", textAlign: "center"}}>
+                        <div style={{width: "83px", textAlign: "center"}}>
                             <a
                                 href="javascript:;"
                                 style={{... STYLE_BUTTON}}

@@ -24,7 +24,8 @@ const STYLE_CENTER = {
     textAlign: "center",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding:"10px"
 };
 
 const STYLE_FORM = {

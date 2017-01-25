@@ -23,7 +23,7 @@ const STYLE_CENTER = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding:"12px"
+    padding:"10px"
 };
 
 const STYLE_BUTTON = {
@@ -43,7 +43,7 @@ const STYLE_BUTTON = {
 
 const STYLE_UL = {
     width: "100%",
-    minWidth: "400px",
+    minWidth: "200px",
     height: "220px",
     color: "black",
     fontFamily: "helvetica",
