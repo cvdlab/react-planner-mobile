@@ -27385,7 +27385,8 @@
 	    textAlign: "center",
 	    display: "flex",
 	    alignItems: "center",
-	    justifyContent: "center"
+	    justifyContent: "center",
+	    padding: "10px"
 	};
 	
 	var STYLE_FORM = {
@@ -28404,7 +28405,8 @@
 	    textAlign: "center",
 	    display: "flex",
 	    alignItems: "center",
-	    justifyContent: "center"
+	    justifyContent: "center",
+	    padding: "10px"
 	};
 	
 	var STYLE_BUTTON = {
@@ -28485,7 +28487,7 @@
 	                        { style: { display: "inline-flex" } },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { style: { width: "100px", textAlign: "center" } },
+	                            { style: { width: "83px", textAlign: "center" } },
 	                            _react2.default.createElement(
 	                                'a',
 	                                {
@@ -28581,7 +28583,8 @@
 	    position: "relative",
 	    display: "flex",
 	    alignItems: "center",
-	    justifyContent: "center"
+	    justifyContent: "center",
+	    padding: "10px"
 	};
 	
 	var STYLE_BUTTON = {
@@ -28600,9 +28603,8 @@
 	
 	var STYLE_UL = {
 	    width: "100%",
-	    minWidth: "400px",
+	    minWidth: "200px",
 	    height: "220px",
-	    marginLeft: "15px",
 	    color: "black",
 	    fontFamily: "helvetica",
 	    fontWeight: 300,
@@ -28654,7 +28656,7 @@
 	                { style: { display: "inline-flex" } },
 	                _react2.default.createElement(
 	                    'div',
-	                    { style: { width: "100px", textAlign: "center" } },
+	                    { style: { width: "80px", textAlign: "center" } },
 	                    _react2.default.createElement(
 	                        'a',
 	                        {
