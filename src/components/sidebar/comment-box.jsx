@@ -1,8 +1,7 @@
 import React, {PropTypes} from 'react';
 
-import IconAlignLeft from 'react-icons/lib/fa/align-left';
+import FaPencil from 'react-icons/lib/fa/pencil';
 import IconTrash from 'react-icons/lib/fa/trash';
-//import IconPaintBrush from 'react-icons/lib/fa/paint-brush';
 
 const STYLE = {
     position: "relative",
@@ -50,13 +49,8 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
 
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}
                        onClick={modifyCommentText}>
-                        <IconAlignLeft />
+                        <FaPencil />
                     </a>
-                    {/*
-                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Disegna"}>
-                    <IconPaintBrush />
-                    </a>
-                    */}
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"}
                        onClick={key => deleteComment(key)}>
                         <IconTrash />
