@@ -1,4 +1,4 @@
-import {userLoginAPI, getProjectsAPI, getProjectAPI, getFileDataAPI} from './api-caller'
+import {userLoginAPI, getProjectsAPI, getProjectAPI, getFileDataAPI, updateFileDataAPI} from './api-caller'
 
 export function enterAddingCommentAction() {
     return {
@@ -135,16 +135,21 @@ export function loadFileData(projectId, fileId) {
     }
 }
 
-export function updateFileData(projectId, fileId, data) {
+export function updateFileData(projectId, fileId) {
 
     return (dispatch, getState) => {
-        let state = getState();
-        updateFileDataAPI(projectId, fileId, data, state.token, 'http://metior-dev.geoweb.it/core/api')
+        let newState = getState();
+        let newProjectData = newState.projectData;
+        let newScene = newProjectData.get('scene');
+        let comments = newState.get('comments');
+        let newMeta = newScene.get('meta').set('comments', comments);
+        newScene = newScene.set('meta', newMeta);
+
+        updateFileDataAPI(projectId, fileId, newScene, newState.token, 'http://metior-dev.geoweb.it/core/api')
             .then(json => {
 
                 dispatch({
-                    type: "UPDATE_FILE_DATA",
-                    projects: json
+                    type: "UPDATE_FILE_DATA"
                 });
 
             })

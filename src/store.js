@@ -109,11 +109,13 @@ function loadFileData(state, data) {
     return newState;
 }
 
+function updateFileData(state){
+    return state;
+}
+
 function storeUserInfo(state, userId, token, projects) {
 
     let newState = state;
-    console.log(userId);
-    console.log(token);
     newState = newState.set('userId', userId);
     newState = newState.set('token', token);
     newState = newState.set('selectedProjectId', 'null');
@@ -172,6 +174,9 @@ function reducer(state, action) {
 
         case "LOAD_FILE_DATA":
             return loadFileData(state, action.data);
+
+        case "UPDATE_FILE_DATA":
+            return updateFileData(state);
 
         case "STORE_USER_INFO":
             return storeUserInfo(state, action.userId, action.token, action.projects);
