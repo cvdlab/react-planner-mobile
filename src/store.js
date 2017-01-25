@@ -112,7 +112,8 @@ function loadFileData(state, data) {
 function storeUserInfo(state, userId, token, projects) {
 
     let newState = state;
-
+    console.log(userId);
+    console.log(token);
     newState = newState.set('userId', userId);
     newState = newState.set('token', token);
     newState = newState.set('selectedProjectId', 'null');

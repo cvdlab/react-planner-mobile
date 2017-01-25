@@ -5,7 +5,6 @@ import Comments from "./comments";
 import LoginForm from "./login";
 import Toolbox from "./toolbox/toolbox";
 import Sidebar from "./sidebar/sidebar";
-import LoginForm from "./login";
 import CommentTextEditor from "./comment-editor";
 import FileNavigation from "./browser/file-navigation"
 import {Models, State2DViewer} from "react-planner";

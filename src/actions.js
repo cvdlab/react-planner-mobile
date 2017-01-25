@@ -152,11 +152,13 @@ export function updateFileData(projectId, fileId, data) {
 }
 
 export function storeUserInfoAction(username, password) {
-
+    let userId;
+    let token;
     return dispatch => {
         userLoginAPI(username, password, 'http://metior-dev.geoweb.it/core/api')
             .then(json => {
-
+                userId = json.userId;
+                token = json.id;
                 return getProjectsAPI(json.userId, json.id, 'http://metior-dev.geoweb.it/core/api');
 
             })
@@ -165,8 +167,8 @@ export function storeUserInfoAction(username, password) {
                 dispatch({
                     type: "STORE_USER_INFO",
                     projects: json,
-                    token: json.id,
-                    userId: json.userId
+                    token: token,
+                    userId: userId
                 });
             })
     }
