@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import FaPencil from 'react-icons/lib/fa/pencil';
+//import FaPencil from 'react-icons/lib/fa/pencil';
 import IconTrash from 'react-icons/lib/fa/trash';
 
 const STYLE = {
@@ -42,15 +42,16 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
     if (active)
         return (
             <div style={{... STYLE_ACTIVE}}>
-                <div style={{maxHeight: "150px", overflow: "scroll", margin: "0px 20px 0px 20px"}}>
+                <div style={{maxHeight: "150px", overflow: "scroll", margin: "0px 20px 0px 20px"}} onClick={modifyCommentText}>
                     {text}
                 </div>
                 <div style={{width: "100%", textAlign: "center", position: "absolute", bottom: "0px"}}>
 
-                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}
-                       onClick={modifyCommentText}>
-                        <FaPencil />
-                    </a>
+                    {/*<a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}*/}
+                       {/*onClick={modifyCommentText}>*/}
+                        {/*<FaApple />*/}
+                    {/*</a>*/}
+
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"}
                        onClick={key => deleteComment(key)}>
                         <IconTrash />
