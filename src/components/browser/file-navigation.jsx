@@ -86,6 +86,23 @@ export default class FileNavigation extends React.Component {
     render() {
         this.isProjectsList = this.props.projectId == 'null';
         let lis = this.props.elemList.map(this.genLi);
+
+        let button = this.props.mustDisplayCancelButton ? (
+            <div style={{display: "inline-flex"}}>
+                <div style={{width: "100px", textAlign: "center"}}>
+
+                    <a
+                        href="javascript:"
+                        style={{... STYLE_BUTTON}}
+                        title={"Annulla"}
+                        onClick={event => this.props.cancelOpenItem()}
+                    >
+                        <IconClose style={{marginTop: "22px"}}/>
+                    </a>
+                </div>
+            </div>
+        ) : "";
+
         return (
             <div style={{... STYLE}}>
                 <div style={{... STYLE_CENTER}}>
@@ -95,19 +112,7 @@ export default class FileNavigation extends React.Component {
                         {lis}
                     </ul>
 
-                    <div style={{display: "inline-flex"}}>
-                        <div style={{width: "100px", textAlign: "center"}}>
-
-                            <a
-                                href="javascript:"
-                                style={{... STYLE_BUTTON}}
-                                title={"Annulla"}
-                                onClick={event => this.props.cancelOpenItem()}
-                            >
-                                <IconClose style={{marginTop: "22px"}}/>
-                            </a>
-                        </div>
-                    </div>
+                    {button}
 
                 </div>
             </div>
@@ -120,5 +125,6 @@ FileNavigation.propTypes = {
     elemList: PropTypes.object.isRequired,
     projectId: PropTypes.string.isRequired,
     loadFilesFn: PropTypes.func.isRequired,
-    loadFileFn: PropTypes.func.isRequired
+    loadFileFn: PropTypes.func.isRequired,
+    mustDisplayCancelButton: PropTypes.bool.isRequired
 };

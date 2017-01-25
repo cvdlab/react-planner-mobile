@@ -93,6 +93,7 @@ class View extends React.Component {
                         elemList={this.props.state.selectedProjectId == 'null' ?
                             this.props.state.projectsList : this.props.state.filesList}
                         projectId={this.props.state.selectedProjectId}
+                        mustDisplayCancelButton={this.props.state.projectData != 'null'}
                     />
                 </If>
                 <If condition={isInLoginScreen}>
