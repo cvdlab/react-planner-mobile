@@ -7,11 +7,12 @@ const STYLE_LI = {
     borderBottom: "1px solid #ccc",
     margin: "10px",
     fontSize: "18px",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
+    paddingTop:"2px"
 };
 
 const STYLE_LI_ICON = {
-    margin: "-10px 15px 0 0",
+    margin: "-6px 15px 0 0",
     display: "inline-block",
     whiteSpace: "normal"
 };
