@@ -3,6 +3,9 @@ import CommentBox from './comment-box';
 import IconOpen from 'react-icons/lib/fa/folder-open-o';
 import IconSave from 'react-icons/lib/fa/floppy-o';
 import IconComment from 'react-icons/lib/fa/comment';
+import IconOut from 'react-icons/lib/fa/sign-out';
+
+
 
 
 const STYLE_BUTTON = {
@@ -79,6 +82,15 @@ export default class Sidebar extends React.Component {
                        onClick={event => this.props.updateFileDataFn()}>
                         <IconSave />
                     </a>
+
+                    <a href="javascript:;"
+                       style={{... STYLE_BUTTON}}
+                       title={"Log out"}
+                       onClick={event => location.reload()}>
+                        <IconOut />
+                    </a>
+
+
                 </div>
             </aside>
         )
