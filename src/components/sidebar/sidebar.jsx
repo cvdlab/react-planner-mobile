@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import CommentBox from './comment-box';
 import IconOpen from 'react-icons/lib/fa/folder-open-o';
 import IconSave from 'react-icons/lib/fa/floppy-o';
+import IconComment from 'react-icons/lib/fa/comment';
 
 
 const STYLE_BUTTON = {
@@ -37,6 +38,11 @@ export default class Sidebar extends React.Component {
     render() {
 
         let jsx = this.props.comments.map(this.genComment);
+        let info = this.props.comments.size == 0 ?  (
+        <div style={{margin: "20px", color: "#ddd", fontWeight: "400", textAlign: "center", fontSize: "15px "}}>
+            Premi <IconComment style={{marginTop: "-3px"}}/> per aggiungere un commento
+        </div>
+        ) : "";
 
         return (
             <aside style={{
@@ -47,6 +53,7 @@ export default class Sidebar extends React.Component {
                 height: this.props.height - 48,
                 paddingBottom: "48px"
             }}>
+                {info}
 
                 {jsx}
 
