@@ -107,6 +107,7 @@ class View extends React.Component {
                     deleteCommentFn={this.props.deleteComment}
                     modifyCommentTextFn={this.props.modifyCommentText}
                     loadProjectsFn={this.props.loadProjects}
+                    updateFileDataFn={this.props.updateFileData}
                 />
                 <ReactSVGPanZoom
                     width={this.props.containerWidth - sidebarWidth}
@@ -162,6 +163,7 @@ View.propTypes = {
     loadProjects: PropTypes.func.isRequired,
     loadFiles: PropTypes.func.isRequired,
     loadFileData: PropTypes.func.isRequired,
+    updateFileData: PropTypes.func.isRequired,
     storeUserInfo: PropTypes.func.isRequired
 };
 

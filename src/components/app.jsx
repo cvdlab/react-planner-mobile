@@ -28,6 +28,7 @@ function mapDispatchToProps(dispatch) {
         loadProjects: bindActionCreators(actions.loadProjects, dispatch),
         loadFiles: bindActionCreators(actions.loadFiles, dispatch),
         loadFileData: bindActionCreators(actions.loadFileData, dispatch),
+        updateFileData: bindActionCreators(actions.updateFileData, dispatch),
         storeUserInfo: bindActionCreators(actions.storeUserInfoAction, dispatch)
     }
 }
