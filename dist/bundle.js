@@ -27396,7 +27396,8 @@
 	    display: "flex",
 	    alignItems: "center",
 	    justifyContent: "center",
-	    padding: "10px"
+	    paddingLeft: "10px",
+	    paddingRight: "10px"
 	};
 	
 	var STYLE_FORM = {
@@ -28415,7 +28416,8 @@
 	    display: "flex",
 	    alignItems: "center",
 	    justifyContent: "center",
-	    padding: "10px"
+	    paddingLeft: "10px",
+	    paddingRight: "10px"
 	};
 	
 	var STYLE_BUTTON_BIG = {
@@ -28619,7 +28621,8 @@
 	    display: "flex",
 	    alignItems: "center",
 	    justifyContent: "center",
-	    padding: "10px"
+	    paddingLeft: "10px",
+	    paddingRight: "10px"
 	};
 	
 	var STYLE_BUTTON = {
