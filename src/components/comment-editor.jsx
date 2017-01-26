@@ -100,8 +100,8 @@ export default class CommentTextEditor extends React.Component {
     render() {
         let isSmall = this.props.containerHeight < 400;
         return (
-            <div style={{... STYLE}}>
-                <div style={{... STYLE_CENTER}}>
+            <div style={STYLE}>
+                <div style={STYLE_CENTER}>
 
                     <div style={{width: "100%", maxWidth: "600px", height: "auto",textAlign: "center", display: "inline-flex"}}>
                             <textarea
@@ -114,7 +114,7 @@ export default class CommentTextEditor extends React.Component {
                         <div style={{width: "83px", textAlign: "center"}}>
                             <a
                                 href="javascript:;"
-                                style={{...  isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG}}
+                                style={isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG}
                                 title={"Salva"}
                                 onClick={this.handleSubmit}
                             >
@@ -122,7 +122,7 @@ export default class CommentTextEditor extends React.Component {
                             </a>
                             <a
                                 href="javascript:;"
-                                style={{...  isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG}}
+                                style={ isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG}
                                 title={"Annulla"}
                                 onClick={event => this.props.cancelModifyCommentTextFn()}
                             >

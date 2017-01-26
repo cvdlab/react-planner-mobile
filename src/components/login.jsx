@@ -70,8 +70,7 @@ const STYLE_BUTTON = {
 export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {user: this.props.text};
-        this.state = {pass: this.props.text};
+        this.state = {user: "", pass: ""};
         this.handleChangeUser = this.handleChangeUser.bind(this);
         this.handleChangePass = this.handleChangePass.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -91,14 +90,13 @@ export default class LoginForm extends React.Component {
 
     render() {
         return (
-            <div style={{... STYLE}}>
-                <div style={{... STYLE_CENTER}}>
+            <div style={STYLE}>
+                <div style={STYLE_CENTER}>
 
-
-                    <form style={{... STYLE_FORM}} onSubmit={this.handleSubmit}>
-                        <input style={{... STYLE_INPUT}} type="text" placeholder="Username" value={this.state.user} onChange={this.handleChangeUser} required/>
-                        <input style={{... STYLE_INPUT}} type="password" placeholder="Password" value={this.state.pass} onChange={this.handleChangePass} required/>
-                        <button style={{... STYLE_BUTTON}}>login</button>
+                    <form style={STYLE_FORM} onSubmit={this.handleSubmit}>
+                        <input style={STYLE_INPUT} type="text" placeholder="Username" value={this.state.user} onChange={this.handleChangeUser} required/>
+                        <input style={STYLE_INPUT} type="password" placeholder="Password" value={this.state.pass} onChange={this.handleChangePass} required/>
+                        <button style={STYLE_BUTTON}>login</button>
 
                     </form>
 
