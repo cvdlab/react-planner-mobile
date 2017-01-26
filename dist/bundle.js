@@ -58,7 +58,7 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _store = __webpack_require__(735);
+	var _store = __webpack_require__(736);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -124669,7 +124669,7 @@
 /* 732 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -124689,10 +124689,12 @@
 	exports.loadProjects = loadProjects;
 	exports.loadFiles = loadFiles;
 	exports.loadFileData = loadFileData;
-	exports.updateFileData = updateFileData;
 	exports.storeUserInfoAction = storeUserInfoAction;
+	exports.updateFileData = updateFileData;
 	
 	var _apiCaller = __webpack_require__(733);
+	
+	var _server = __webpack_require__(735);
 	
 	function enterAddingCommentAction() {
 	    return {
@@ -124785,7 +124787,7 @@
 	    return function (dispatch, getState) {
 	        var state = getState();
 	
-	        (0, _apiCaller.getProjectsAPI)(state.userId, state.token, 'http://metior-dev.geoweb.it/core/api').then(function (json) {
+	        (0, _apiCaller.getProjectsAPI)(state.userId, state.token, _server.SERVER_CORE_URL).then(function (json) {
 	
 	            dispatch({
 	                type: "LOAD_PROJECTS",
@@ -124800,7 +124802,7 @@
 	    return function (dispatch, getState) {
 	        var state = getState();
 	
-	        (0, _apiCaller.getProjectAPI)(projectId, state.userId, state.token, 'http://metior-dev.geoweb.it/core/api').then(function (json) {
+	        (0, _apiCaller.getProjectAPI)(projectId, state.userId, state.token, _server.SERVER_CORE_URL).then(function (json) {
 	
 	            dispatch({
 	                type: "LOAD_FILES",
@@ -124815,43 +124817,48 @@
 	
 	    return function (dispatch, getState) {
 	        var state = getState();
-	        (0, _apiCaller.getFileDataAPI)(projectId, fileId, state.userId, state.token, 'http://metior-dev.geoweb.it/core/api').then(function (json) {
+	        (0, _apiCaller.getFileDataAPI)(projectId, fileId, state.userId, state.token, _server.SERVER_CORE_URL).then(function (json) {
 	
 	            dispatch({
 	                type: "LOAD_FILE_DATA",
-	                data: json
+	                data: json,
+	                fileId: fileId
 	            });
 	        });
 	    };
 	}
 	
-	function updateFileData(projectId, fileId) {
+	/*
+	export function updateFileData(projectId, fileId) {
 	
-	    return function (dispatch, getState) {
-	        var newState = getState();
-	        var newProjectData = newState.projectData;
-	        var newScene = newProjectData.get('scene');
-	        var comments = newState.get('comments');
-	        var newMeta = newScene.get('meta').set('comments', comments);
+	    return (dispatch, getState) => {
+	        let newState = getState();
+	        let newProjectData = newState.projectData;
+	        let newScene = newProjectData.get('scene');
+	        let comments = newState.get('comments');
+	        let newMeta = newScene.get('meta').set('comments', comments);
 	        newScene = newScene.set('meta', newMeta);
 	
-	        (0, _apiCaller.updateFileDataAPI)(projectId, fileId, newScene, newState.token, 'http://metior-dev.geoweb.it/core/api').then(function (json) {
+	        updateFileDataAPI(projectId, fileId, newScene, newState.token, 'http://metior-dev.geoweb.it/core/api')
+	            .then(json => {
 	
-	            dispatch({
-	                type: "UPDATE_FILE_DATA"
-	            });
-	        });
-	    };
+	                dispatch({
+	                    type: "UPDATE_FILE_DATA"
+	                });
+	
+	            })
+	    }
 	}
+	*/
 	
 	function storeUserInfoAction(username, password) {
 	    var userId = void 0;
 	    var token = void 0;
 	    return function (dispatch) {
-	        (0, _apiCaller.userLoginAPI)(username, password, 'http://metior-dev.geoweb.it/core/api').then(function (json) {
+	        (0, _apiCaller.userLoginAPI)(username, password, _server.SERVER_CORE_URL).then(function (json) {
 	            userId = json.userId;
 	            token = json.id;
-	            return (0, _apiCaller.getProjectsAPI)(json.userId, json.id, 'http://metior-dev.geoweb.it/core/api');
+	            return (0, _apiCaller.getProjectsAPI)(json.userId, json.id, _server.SERVER_CORE_URL);
 	        }).then(function (json) {
 	
 	            dispatch({
@@ -124860,6 +124867,54 @@
 	                token: token,
 	                userId: userId
 	            });
+	        });
+	    };
+	}
+	
+	function updateFileData() {
+	
+	    return function (dispatch, getState) {
+	        var state = getState();
+	
+	        var accessToken = state.token;
+	        var userID = state.userId;
+	        var fileID = state.selectedFileId;
+	        console.log(fileID);
+	        var projectID = state.selectedProjectId;
+	
+	        var newProjectData = state.projectData;
+	        var scene = newProjectData.get('scene');
+	        var comments = state.get('comments');
+	        var newMeta = scene.get('meta').set('comments', comments);
+	        scene = scene.set('meta', newMeta);
+	
+	        var planName = 'plan';
+	
+	        var filename = planName;
+	        var extension = filename.substr(filename.lastIndexOf('.') + 1);
+	
+	        if (!extension || extension !== 'json') {
+	            filename += '.json';
+	        }
+	
+	        var newData = scene.toJS();
+	
+	        var blob = new window.Blob([JSON.stringify(newData, null, 2)], { type: 'application/json' });
+	
+	        var file = new window.File([blob], filename);
+	
+	        var formData = new window.FormData();
+	        formData.append('file', file);
+	        formData.append('name', planName);
+	        formData.append('type', 'TYPE_PLAN');
+	
+	        (0, _apiCaller.callAPI)(_server.SERVER_CORE_URL + '/accounts/' + userID + '/overwrite-file/projects/' + projectID + '/file/' + fileID, 'POST', accessToken, formData).then(function (data) {
+	            alert('Progetto salvato con successo');
+	            dispatch({
+	                type: "UPDATE_FILE_DATA"
+	            });
+	        }, function (error) {
+	            alert('Il salvataggio del progetto non è avvenuto con successo');
 	        });
 	    };
 	}
@@ -124873,11 +124928,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.callAPI = callAPI;
 	exports.userLoginAPI = userLoginAPI;
 	exports.getProjectsAPI = getProjectsAPI;
 	exports.getProjectAPI = getProjectAPI;
 	exports.getFileDataAPI = getFileDataAPI;
-	exports.updateFileDataAPI = updateFileDataAPI;
 	
 	__webpack_require__(734);
 	
@@ -124982,18 +125037,22 @@
 	/************** FILES **************/
 	/***********************************/
 	
-	function updateFileDataAPI(projectID, fileID, data, session, coreUrl) {
+	/*export function updateFileDataAPI(projectID, fileID, data, session, coreUrl) {
 	
-	    var params = [{
-	        project: projectID
-	    }, {
-	        file: fileID
-	    }, {
-	        data: data
-	    }];
-	
-	    return callAPI(coreUrl + '/files/update', 'PUT', session, params);
-	}
+	    let params = [
+	        {
+	            project: projectID
+	        },
+	        {
+	            file: fileID
+	        },
+	        {
+	            data: data
+	        }
+	    ];
+
+	    return callAPI(`${coreUrl}/files/update`, 'PUT', session, params);
+	}*/
 
 /***/ },
 /* 734 */
@@ -125461,6 +125520,17 @@
 
 /***/ },
 /* 735 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var SERVER_CORE_URL = exports.SERVER_CORE_URL = 'http://metior-dev.geoweb.it/core/api';
+
+/***/ },
+/* 736 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -125474,7 +125544,7 @@
 	
 	var _redux = __webpack_require__(186);
 	
-	var _reduxThunk = __webpack_require__(736);
+	var _reduxThunk = __webpack_require__(737);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
@@ -125578,10 +125648,14 @@
 	    return newState;
 	}
 	
-	function loadFileData(state, data) {
+	function loadFileData(state, data, fileId) {
 	
 	    var newState = state;
 	    newState = newState.set('projectData', new _reactPlanner.Models.State({ scene: data }));
+	    newState = newState.set('selectedFileId', fileId);
+	    newState = newState.set('activeComment', -1);
+	    var comments = newState.get('projectData').get('scene').get('meta').get('comments');
+	    newState = newState.set('comments', comments == undefined ? new _immutable.List() : comments);
 	    newState = newState.set('mode', _modes.MODE_PANNING);
 	
 	    return newState;
@@ -125649,7 +125723,7 @@
 	            return loadFiles(state, action.files, action.projectId);
 	
 	        case "LOAD_FILE_DATA":
-	            return loadFileData(state, action.data);
+	            return loadFileData(state, action.data, action.fileId);
 	
 	        case "UPDATE_FILE_DATA":
 	            return updateFileData(state);
@@ -125671,7 +125745,7 @@
 	}
 
 /***/ },
-/* 736 */
+/* 737 */
 /***/ function(module, exports) {
 
 	'use strict';
