@@ -25,7 +25,8 @@ const STYLE_CENTER = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding:"10px"
+    paddingLeft:"10px",
+    paddingRight:"10px"
 };
 
 const STYLE_BUTTON_BIG = {
