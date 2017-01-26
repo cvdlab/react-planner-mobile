@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-function callAPI(uri, method, sessionToken, params) {
+export function callAPI(uri, method, sessionToken, params) {
 
     let requestObject = {
         method,
@@ -105,7 +105,7 @@ export function getFileDataAPI(projectID, fileID, userID, sessionToken, coreUrl)
 /***********************************/
 
 
-export function updateFileDataAPI(projectID, fileID, data, session, coreUrl) {
+/*export function updateFileDataAPI(projectID, fileID, data, session, coreUrl) {
 
     let params = [
         {
@@ -120,7 +120,7 @@ export function updateFileDataAPI(projectID, fileID, data, session, coreUrl) {
     ];
 
     return callAPI(`${coreUrl}/files/update`, 'PUT', session, params);
-}
+}*/
 
 
 

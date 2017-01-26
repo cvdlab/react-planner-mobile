@@ -100,10 +100,14 @@ function loadFiles(state, files, projectId) {
     return newState;
 }
 
-function loadFileData(state, data) {
+function loadFileData(state, data, fileId) {
 
     let newState = state;
     newState = newState.set('projectData', new Models.State({scene: data}));
+    newState = newState.set('selectedFileId', fileId);
+    newState = newState.set('activeComment', -1);
+    let comments = newState.get('projectData').get('scene').get('meta').get('comments');
+    newState = newState.set('comments', comments == undefined ? new List() : comments);
     newState = newState.set('mode', MODE_PANNING);
 
     return newState;
@@ -173,7 +177,7 @@ function reducer(state, action) {
             return loadFiles(state, action.files, action.projectId);
 
         case "LOAD_FILE_DATA":
-            return loadFileData(state, action.data);
+            return loadFileData(state, action.data, action.fileId);
 
         case "UPDATE_FILE_DATA":
             return updateFileData(state);

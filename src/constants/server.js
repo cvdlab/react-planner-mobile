@@ -1,0 +1,1 @@
+export const SERVER_CORE_URL = 'http://metior-dev.geoweb.it/core/api';
