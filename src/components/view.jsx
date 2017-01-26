@@ -120,6 +120,8 @@ class View extends React.Component {
                     tool={tool}
                     toolbarPosition={"none"}
                     style={ {overflow: "hidden"}}
+                    detectWheel={false}
+
                 >
 
                     <svg
