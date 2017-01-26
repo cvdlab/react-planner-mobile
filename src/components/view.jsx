@@ -28,7 +28,7 @@ class View extends React.Component {
 
     }
 
-    componentDidUpdate() {
+    /*componentDidUpdate() {
         let deltaZoom = this.props.state.zoomLevel - this.zoomLevel;
 
         if (deltaZoom > 0)
@@ -38,7 +38,7 @@ class View extends React.Component {
 
         this.zoomLevel = this.props.state.zoomLevel;
 
-    }
+    }*/
 
     onMouseDown(x, y) {
         switch (this.props.state.mode) {
@@ -138,8 +138,8 @@ class View extends React.Component {
                     enterCommentMode={this.props.enterAddingComment}
                     cancelCommentMode={this.props.cancelAddingComment}
                     mode={this.props.state.mode}
-                    zoomOut={this.props.zoomOut}
-                    zoomIn={this.props.zoomIn}/>
+                    zoomOut={() => this.viewer.zoomOnViewerCenter(ZOOM_OUT_DELTA)}
+                    zoomIn={() => this.viewer.zoomOnViewerCenter(ZOOM_IN_DELTA)}/>
 
 
             </div>
