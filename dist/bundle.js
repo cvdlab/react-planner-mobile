@@ -23396,15 +23396,16 @@
 	        value: function componentDidMount() {
 	            this.viewer.fitToViewer();
 	        }
-	    }, {
-	        key: "componentDidUpdate",
-	        value: function componentDidUpdate() {
-	            var deltaZoom = this.props.state.zoomLevel - this.zoomLevel;
 	
-	            if (deltaZoom > 0) this.viewer.zoomOnViewerCenter(_zoom.ZOOM_IN_DELTA);else if (deltaZoom < 0) this.viewer.zoomOnViewerCenter(_zoom.ZOOM_OUT_DELTA);
+	        /*componentDidUpdate() {
+	            let deltaZoom = this.props.state.zoomLevel - this.zoomLevel;
+	             if (deltaZoom > 0)
+	                this.viewer.zoomOnViewerCenter(ZOOM_IN_DELTA);
+	            else if (deltaZoom < 0)
+	                this.viewer.zoomOnViewerCenter(ZOOM_OUT_DELTA);
+	             this.zoomLevel = this.props.state.zoomLevel;
+	         }*/
 	
-	            this.zoomLevel = this.props.state.zoomLevel;
-	        }
 	    }, {
 	        key: "onMouseDown",
 	        value: function onMouseDown(x, y) {
@@ -23495,7 +23496,9 @@
 	                        detectAutoPan: false,
 	                        tool: tool,
 	                        toolbarPosition: "none",
-	                        style: { overflow: "hidden" }
+	                        style: { overflow: "hidden" },
+	                        detectWheel: false
+	
 	                    },
 	                    _react2.default.createElement(
 	                        "svg",
@@ -23510,8 +23513,12 @@
 	                    enterCommentMode: this.props.enterAddingComment,
 	                    cancelCommentMode: this.props.cancelAddingComment,
 	                    mode: this.props.state.mode,
-	                    zoomOut: this.props.zoomOut,
-	                    zoomIn: this.props.zoomIn })
+	                    zoomOut: function zoomOut() {
+	                        return _this2.viewer.zoomOnViewerCenter(_zoom.ZOOM_OUT_DELTA);
+	                    },
+	                    zoomIn: function zoomIn() {
+	                        return _this2.viewer.zoomOnViewerCenter(_zoom.ZOOM_IN_DELTA);
+	                    } })
 	            );
 	        }
 	    }]);
@@ -26582,7 +26589,11 @@
 	    x = touchPosition.clientX - Math.round(left);
 	    y = touchPosition.clientY - Math.round(top);
 	  } else {
-	    if ([_constants.MODE_PANNING, _constants.MODE_ZOOMING].includes(value.mode)) return (0, _common.resetMode)(value);
+	    if ([_constants.MODE_PANNING, _constants.MODE_ZOOMING].includes(value.mode)) {
+	      return (0, _common.resetMode)(value);
+	    } else if ([_constants.MODE_IDLE].includes(value.mode)) {
+	      return value;
+	    }
 	  }
 	
 	  switch (tool) {
@@ -27342,8 +27353,6 @@
 	    value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(177);
@@ -27436,8 +27445,7 @@
 	
 	        var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
 	
-	        _this.state = { user: _this.props.text };
-	        _this.state = { pass: _this.props.text };
+	        _this.state = { user: "", pass: "" };
 	        _this.handleChangeUser = _this.handleChangeUser.bind(_this);
 	        _this.handleChangePass = _this.handleChangePass.bind(_this);
 	        _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -27465,18 +27473,18 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { style: _extends({}, STYLE) },
+	                { style: STYLE },
 	                _react2.default.createElement(
 	                    'div',
-	                    { style: _extends({}, STYLE_CENTER) },
+	                    { style: STYLE_CENTER },
 	                    _react2.default.createElement(
 	                        'form',
-	                        { style: _extends({}, STYLE_FORM), onSubmit: this.handleSubmit },
-	                        _react2.default.createElement('input', { style: _extends({}, STYLE_INPUT), type: 'text', placeholder: 'Username', value: this.state.user, onChange: this.handleChangeUser, required: true }),
-	                        _react2.default.createElement('input', { style: _extends({}, STYLE_INPUT), type: 'password', placeholder: 'Password', value: this.state.pass, onChange: this.handleChangePass, required: true }),
+	                        { style: STYLE_FORM, onSubmit: this.handleSubmit },
+	                        _react2.default.createElement('input', { style: STYLE_INPUT, type: 'text', placeholder: 'Username', value: this.state.user, onChange: this.handleChangeUser, required: true }),
+	                        _react2.default.createElement('input', { style: STYLE_INPUT, type: 'password', placeholder: 'Password', value: this.state.pass, onChange: this.handleChangePass, required: true }),
 	                        _react2.default.createElement(
 	                            'button',
-	                            { style: _extends({}, STYLE_BUTTON) },
+	                            { style: STYLE_BUTTON },
 	                            'login'
 	                        )
 	                    )
@@ -28493,10 +28501,10 @@
 	            var isSmall = this.props.containerHeight < 400;
 	            return _react2.default.createElement(
 	                'div',
-	                { style: _extends({}, STYLE) },
+	                { style: STYLE },
 	                _react2.default.createElement(
 	                    'div',
-	                    { style: _extends({}, STYLE_CENTER) },
+	                    { style: STYLE_CENTER },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { style: { width: "100%", maxWidth: "600px", height: "auto", textAlign: "center", display: "inline-flex" } },
@@ -28518,7 +28526,7 @@
 	                                'a',
 	                                {
 	                                    href: 'javascript:;',
-	                                    style: _extends({}, isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG),
+	                                    style: isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG,
 	                                    title: "Salva",
 	                                    onClick: this.handleSubmit
 	                                },
@@ -28528,7 +28536,7 @@
 	                                'a',
 	                                {
 	                                    href: 'javascript:;',
-	                                    style: _extends({}, isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG),
+	                                    style: isSmall ? STYLE_BUTTON_SMALL : STYLE_BUTTON_BIG,
 	                                    title: "Annulla",
 	                                    onClick: function onClick(event) {
 	                                        return _this2.props.cancelModifyCommentTextFn();
@@ -47572,6 +47580,8 @@
 	
 	var _browser = __webpack_require__(419);
 	
+	var _layerOperations = __webpack_require__(358);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function ToolbarSaveButton(_ref, _ref2) {
@@ -47582,7 +47592,12 @@
 	
 	  var saveProjectToFile = function saveProjectToFile(event) {
 	    event.preventDefault();
-	    var scene = state.get('scene').toJS();
+	    var scene = state.get('scene').update('layers', function (layers) {
+	      return layers.map(function (layer) {
+	        return (0, _layerOperations.unselectAll)(layer);
+	      });
+	    }).toJS();
+	
 	    (0, _browser.browserDownload)(scene);
 	  };
 	
@@ -118697,7 +118712,7 @@
 	  value: true
 	});
 	// THIS IS AN AUTOGENERATED FILE. DO NOT EDIT THIS FILE DIRECTLY.
-	var VERSION = exports.VERSION = '0.18.4';
+	var VERSION = exports.VERSION = '1.0.0';
 
 /***/ },
 /* 649 */
