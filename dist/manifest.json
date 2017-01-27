@@ -1,0 +1,14 @@
+{
+  "short_name": "Planner Mobile",
+  "name": "Planner Mobile",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "landscape"
+}
