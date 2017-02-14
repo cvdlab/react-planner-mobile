@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 
 //import FaPencil from 'react-icons/lib/fa/pencil';
 import IconTrash from 'react-icons/lib/fa/trash';
+import IconCenter from 'react-icons/lib/fa/crosshairs';
 
 const STYLE = {
     position: "relative",
@@ -36,7 +37,7 @@ const STYLE_BUTTON = {
     verticalAlign: "middle"
 };
 
-export default function CommentBox({text, active, openComment, deleteComment, modifyCommentText}) {
+export default function CommentBox({text, active, openComment, deleteComment, modifyCommentText, centerCommentFn}) {
     let truncatedText = text.substring(0, 85);
     if (text.length > 85) truncatedText = truncatedText.concat("...");
     if (active)
@@ -47,10 +48,10 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
                 </div>
                 <div style={{width: "100%", textAlign: "center", position: "absolute", bottom: "0px"}}>
 
-                    {/*<a href="javascript:;" style={{... STYLE_BUTTON}} title={"Modifica"}*/}
-                       {/*onClick={modifyCommentText}>*/}
-                        {/*<FaApple />*/}
-                    {/*</a>*/}
+                    <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Centra visuale"}
+                       onClick={centerCommentFn}>
+                        <IconCenter />
+                    </a>
 
                     <a href="javascript:;" style={{... STYLE_BUTTON}} title={"Elimina"}
                        onClick={key => deleteComment(key)}>
@@ -59,7 +60,7 @@ export default function CommentBox({text, active, openComment, deleteComment, mo
                 </div>
 
             </div>
-        )
+        );
     else
         return (
             <div style={{...  STYLE}} onClick={key => openComment(key)}>
@@ -73,5 +74,6 @@ CommentBox.propTypes = {
     active: PropTypes.bool.isRequired,
     openComment: PropTypes.func.isRequired,
     deleteComment: PropTypes.func.isRequired,
-    modifyCommentText: PropTypes.func.isRequired
+    modifyCommentText: PropTypes.func.isRequired,
+    centerCommentFn: PropTypes.func.isRequired
 };

@@ -33,7 +33,7 @@ export default class Sidebar extends React.Component {
                 openComment={event => this.props.openCommentFn(i)}
                 deleteComment={event => this.props.deleteCommentFn(i)}
                 modifyCommentText={event => this.props.modifyCommentTextFn(i)}
-
+                centerCommentFn={event => this.props.centerCommentFn(attributes.get('x'), attributes.get('y'))}
             />
         )
     }
@@ -106,5 +106,6 @@ Sidebar.propTypes = {
     deleteCommentFn: PropTypes.func.isRequired,
     modifyCommentTextFn: PropTypes.func.isRequired,
     loadProjectsFn: PropTypes.func.isRequired,
-    updateFileDataFn: PropTypes.func.isRequired
+    updateFileDataFn: PropTypes.func.isRequired,
+    centerCommentFn: PropTypes.func.isRequired
 };

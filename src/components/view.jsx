@@ -21,6 +21,7 @@ class View extends React.Component {
         this.viewer = null;
         this.zoomLevel = ZOOM_START_LEVEL;
         this.blankProject = new Models.State();
+        this.centerView = this.centerView.bind(this);
     }
 
     componentDidMount() {
@@ -28,24 +29,17 @@ class View extends React.Component {
 
     }
 
-    /*componentDidUpdate() {
-        let deltaZoom = this.props.state.zoomLevel - this.zoomLevel;
-
-        if (deltaZoom > 0)
-            this.viewer.zoomOnViewerCenter(ZOOM_IN_DELTA);
-        else if (deltaZoom < 0)
-            this.viewer.zoomOnViewerCenter(ZOOM_OUT_DELTA);
-
-        this.zoomLevel = this.props.state.zoomLevel;
-
-    }*/
-
     onMouseDown(x, y) {
         switch (this.props.state.mode) {
             case MODE_ADDING_COMMENT:
                 this.props.addComment(Math.round(x), Math.round(y));
                 break;
         }
+    }
+
+
+    centerView(x, y) {
+        this.viewer.setPointOnViewerCenter(x, y, .7);
     }
 
     render() {
@@ -110,6 +104,7 @@ class View extends React.Component {
                     modifyCommentTextFn={this.props.modifyCommentText}
                     loadProjectsFn={this.props.loadProjects}
                     updateFileDataFn={this.props.updateFileData}
+                    centerCommentFn={this.centerView}
                 />
                 <ReactSVGPanZoom
                     width={this.props.containerWidth - sidebarWidth}
